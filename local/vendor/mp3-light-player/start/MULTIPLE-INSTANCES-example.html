@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>MP3 Light Player multiple instances example</title>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1 user-scalable=no" />
+		
+		<!--  Import required css and js files  -->
+		<link rel="stylesheet" type="text/css"  href="content/global.css"/>
+		<script type="text/javascript" src="java/FWDMLP.js"></script>
+		
+		<style type="text/css">
+			#myDiv{
+				margin:auto;
+			}
+			
+			#myDiv2{
+				margin:auto;
+				margin-top:20px;
+			}
+		</style>
+	
+		<!-- Setup audio player-->
+		<script type="text/javascript">
+			FWDMLPUtils.onReady(function(){
+				new FWDMLP({
+					//main settings
+					instanceName:"player1",
+					parentId:"myDiv",
+					playlistsId:"playlists",
+					mainFolderPath:"content",
+					skinPath:"minimal_skin_dark",
+					facebookAppId:"213684265480896",//required only if the facebook share button is used
+					showSoundCloudUserNameInTitle:"yes",
+					useDeepLinking:"yes",
+					rightClickContextMenu:"developer",
+					showButtonsToolTips:"yes",
+					autoPlay:"yes",
+					loop:"no",
+					shuffle:"no",
+					maxWidth:450,
+					volume:.8,
+					toolTipsButtonsHideDelay:1.5,
+					toolTipsButtonFontColor:"#333333",
+					//controller settings
+					animateOnIntro:"yes",
+					showSoundAnimation:"yes",
+					showLoopButton:"yes",
+					showShuffleButton:"yes",
+					showDownloadMp3Button:"yes",
+					showFacebookButton:"yes",
+					expandBackground:"no",
+					addCountingToTracks:"yes",
+					tracksCountingColor:"#FFFFFF",
+					tracksCountingLineColor:"#999999",
+					titleColor:"#FFFFFF",
+					timeColor:"#5a5a5a",
+					//controller align and size settings (described in detail in the documentation!)
+					controllerHeight:103,
+					startSpaceBetweenButtons:5,
+					allButtonsOffsetTopAndBottom:14,
+					spaceBetweenMainScrubberAndTime:10,
+					startTimeSpace:10,
+					scrubbersOffsetWidth:2,
+					scrubbersOffestTotalWidth:0,
+					scrubberOffsetBottom:4,
+					equlizerOffsetLeft:1,
+
+					//playlists window settings
+					showPlaylistsButtonAndPlaylists:"yes",
+					showPlaylistsByDefault:"no",
+					forceDisableDownloadButtonForPodcast:"yes",
+					forceDisableDownloadButtonForOfficialFM:"yes",
+					forceDisableDownloadButtonForFolder:"yes",
+					thumbnailSelectedType:"opacity",
+					startAtPlaylist:0,
+					startAtTrack:0,
+					buttonsMargins:0,
+					thumbnailMaxWidth:350, 
+					thumbnailMaxHeight:350,
+					horizontalSpaceBetweenThumbnails:40,
+					verticalSpaceBetweenThumbnails:40,
+					
+					//popup settings
+					showPopupButton:"yes",
+					popupWindowBackgroundColor:"#000000",
+					popupWindowWidth:450,
+					popupWindowHeight:103
+				});
+				
+				new FWDMLP({
+					//main settings
+					instanceName:"player2",
+					parentId:"myDiv2",
+					playlistsId:"playlists",
+					mainFolderPath:"content",
+					skinPath:"minimal_skin_dark",
+					facebookAppId:"213684265480896",//required only if the facebook share button is used
+					showSoundCloudUserNameInTitle:"yes",
+					useDeepLinking:"no",
+					showContextMenu:"yes",
+					showButtonsToolTips:"yes",
+					autoPlay:"no",
+					loop:"no",
+					shuffle:"no",
+					maxWidth:450,
+					volume:.8,
+					toolTipsButtonsHideDelay:1.5,
+					toolTipsButtonFontColor:"#333333",
+					
+					//controller settings
+					animateOnIntro:"yes",
+					showSoundAnimation:"yes",
+					showLoopButton:"yes",
+					showShuffleButton:"yes",
+					showFacebookButton:"yes",
+					addCountingToTracks:"yes",
+					tracksCountingColor:"#FFFFFF",
+					tracksCountingLineColor:"#999999",
+					titleColor:"#FFFFFF",
+					timeColor:"#5a5a5a",
+					//controller align and size settings (described in detail in the documentation!)
+					controllerHeight:103,
+					startSpaceBetweenButtons:5,
+					spaceBetweenButtons:6,
+					allButtonsOffsetTopAndBottom:14,
+					mainScrubberOffsetTop:42,
+					spaceBetweenMainScrubberAndTime:10,
+					startTimeSpace:10,
+					scrubbersOffsetWidth:2,
+					scrubbersOffestTotalWidth:0,
+					volumeButtonAndScrubberOffsetTop:42,
+					spaceBetweenVolumeButtonAndScrubber:4,
+					scrubberOffsetBottom:4,
+					equlizerOffsetLeft:1,
+
+					//playlists window settings
+					showPlaylistsButtonAndPlaylists:"yes",
+					showPlaylistsByDefault:"no",
+					thumbnailSelectedType:"opacity",
+					startAtPlaylist:0,
+					startAtTrack:0,
+					buttonsMargins:0,
+					thumbnailMaxWidth:350, 
+					thumbnailMaxHeight:350,
+					horizontalSpaceBetweenThumbnails:40,
+					verticalSpaceBetweenThumbnails:40,
+					
+					//popup settings
+					showPopupButton:"yes",
+					popupWindowBackgroundColor:"#000000",
+					popupWindowWidth:450,
+					popupWindowHeight:103
+				});
+			});
+		</script>
+	</head>
+
+	<body style="background-color:#555555;">
+		
+		<!-- Player1 holder -->
+		<div id="myDiv"></div>
+		
+		<!-- Player2 holder -->
+		<div id="myDiv2"></div>
+		
+		<!--  Playlists -->
+		<ul id="playlists" style="display:none;">
+			<li data-source="playlist1"  data-thumbnail-path="content/thumbnails/large1.jpg">
+				<p class="minimalDarkCategoriesTitle"><span class="bold">Title: </span>My playlist 1</p>
+				<p class="minimalDarkCategoriesType"><span class="bold">Type: </span><span class="minimalDarkCategoriesTypeIn">HTML</span></p>
+				<p class="minimalDarkCategoriesDescription"><span class="bold">Description: </span>This playlist is created using html elements.</p>
+			</li>
+			
+			<li data-source="http://www.kingola.com/feed/podcast/" data-thumbnail-path="content/thumbnails/large2.jpg">
+				<p class="minimalDarkCategoriesTitle"><span class="bold">Title: </span>My playlist 2</p>
+				<p class="minimalDarkCategoriesType"><span class="bold">Type: </span><span class="minimalDarkCategoriesTypeIn">PODCAST</span></p>
+				<p class="minimalDarkCategoriesDescription"><span class="bold">Description: </span>This playlist is created using a podcast URL.</p>
+			</li>
+			
+			<li data-source="https://soundcloud.com/theworldofnick/sets/trap" data-thumbnail-path="content/thumbnails/large3.jpg">
+				<p class="minimalDarkCategoriesTitle"><span class="bold">Title: </span>My playlist 3</p>
+				<p class="minimalDarkCategoriesType"><span class="bold">Type: </span><span class="minimalDarkCategoriesTypeIn">SOUNDCLOUD</span></p>
+				<p class="minimalDarkCategoriesDescription"><span class="bold">Description: </span>This playlist is created using a SoundCloud playlist URL.</p>
+			</li>
+			
+			<li data-source="http://www.webdesign-flash.ro/p/msp/content/playlist1.xml" data-thumbnail-path="content/thumbnails/large4.jpg">
+				<p class="minimalDarkCategoriesTitle"><span class="bold">Title: </span>My playlist 4</p>
+				<p class="minimalDarkCategoriesType"><span class="bold">Type: </span><span class="minimalDarkCategoriesTypeIn">XML</span></p>
+				<p class="minimalDarkCategoriesDescription"><span class="bold">Description: </span>This playlist is created using a XML file.</p>
+			</li>	
+			
+			<li data-source="official.fm/YrOG"  data-thumbnail-path="content/thumbnails/large5.jpg">
+				<p class="minimalDarkCategoriesTitle"><span class="bold">Title: </span>My playlist 5</p>
+				<p class="minimalDarkCategoriesType"><span class="bold">Type: </span><span class="minimalDarkCategoriesTypeIn">OFFICIAL.FM</span></p>
+				<p class="minimalDarkCategoriesDescription"><span class="bold">Description: </span>This playlist is created using an official.fm playlist URL.</p>
+			</li>
+			
+			<li data-source="folder:mp3" data-thumbnail-path="content/thumbnails/large6.jpg">
+				<p class="minimalDarkCategoriesTitle"><span class="bold">Title: </span>My playlist 6</p>
+				<p class="minimalDarkCategoriesType"><span class="bold">Type: </span><span class="minimalDarkCategoriesTypeIn">FOLDER</span></p>
+				<p class="minimalDarkCategoriesDescription"><span class="bold">Description: </span>This playlist is created from a folder with mp3 files.</p>
+			</li>
+		</ul>
+			
+		<!--  HTML playlist -->
+		<ul id="playlist1" style="display:none;">
+			<li data-path="content/mp3/01.mp3"   data-downloadable="yes" data-duration="06:16">
+				<p><span style="font-weight:bold;">Yellow Claw & Tropkillaz</span> - Assets feat. The Kemist</p>
+			</li>
+			<li data-path="content/mp3/02.mp3"  data-downloadable="yes" data-duration="04:41">
+				<p><span style="font-weight:bold;">MACKLEMORE & RYAN LEWIS vs MAJOR LAZER</span> -  can't hold us remix (ft swappi and 1st klase)</p>
+			</li>
+			<li data-path="content/mp3/03.mp3"  data-downloadable="yes" data-duration="03:49">
+				<p><span style="font-weight:bold;">Crush ft. Camden Cox</span> - Could This Be Real (Luminox Remix)</p>
+			</li>
+			<li data-path="content/mp3/04.mp3"  data-duration="04:19">
+				<p><span style="font-weight:bold;">DJ SLiiNK X DiRTY SOUTH JOE</span> - CERTiFiED TRAP TOUR OFFiCiAL MiX</p>
+			</li>
+			<li data-path="content/mp3/05.mp3"  data-downloadable="yes" data-duration="03:54">
+				<p><span style="font-weight:bold;">Knife Party</span> - LRAD (CRNKN FESTIE RMX)</p>
+			</li>
+			<li data-path="content/mp3/06.mp3"  data-downloadable="yes" data-duration="02:01">
+				<p><span style="font-weight:bold;">Sandro Silva & Quintino</span> - Epic (Carnage & Luminox Festival Trap Refix)</p>
+			</li>
+			<li data-path="content/mp3/07.mp3"  data-downloadable="yes" data-duration="02:33">
+				<p><span style="font-weight:bold;">New World Sound & Thomas Newson</span> - Flute (Tomsize & Simeon Festival Trap Remix)</p>
+			</li>
+			<li data-path="content/mp3/08.mp3"  data-downloadable="yes" data-duration="02:41">
+				<p><span style="font-weight:bold;">Sick Individuals & Axwell ft. Taylr Renee</span> - I AM (Jacob Plant Remix)</p>
+			</li>
+			<li data-path="content/mp3/09.mp3"  data-downloadable="yes" data-duration="02:36">
+				<p><span style="font-weight:bold;">Morgan Page vs. Deorro</span> - "Carry Yee" (Morgan Page Bootleg Remix)</p>
+			</li>
+			<li data-path="content/mp3/10.mp3"  data-downloadable="yes" data-duration="03:15">
+				<p><span style="font-weight:bold;">Helicopter Showdown & Kezwik ft. La Meduza</span> - No Return</p>
+			</li>
+			<li data-path="content/mp3/11.mp3"  data-downloadable="yes" data-duration="02:53">
+				<p><span style="font-weight:bold;">Faithless vs. Danny Avila vs. Justice</span> - We Are Poseidon Insomnia (MAKJ Vs. VINAI Edit)</p>
+			</li>
+			<li data-path="content/mp3/12.mp3"  data-downloadable="yes" data-duration="00:35">
+				<p><span style="font-weight:bold;">Headhunterz ft. Krewella</span> - United Kids Of The World (Project 46 Remix)</p>
+			</li>
+			<li data-path="content/mp3/13.mp3"  data-downloadable="yes" data-duration="00:31">
+				<p><span style="font-weight:bold;">SVT116 – Niconé feat. Malonda</span> - Let Love Begin (Acapella)</p>
+			</li>
+			<li data-path="content/mp3/14.mp3"  data-downloadable="yes" data-duration="01:14">
+				<p><span style="font-weight:bold;">Terravita & Casey Desmond</span> - Settle The Score (Case & Point Remix)</p>
+			</li>
+			<li data-path="content/mp3/15.mp3"  data-downloadable="yes" data-duration="03:20">
+				<p><span style="font-weight:bold;">The Prototypes 'Chronicles' Mix</span> - Recorded Exclusively for EDM.COM</p>
+			</li>
+			<li data-path="content/mp3/16.mp3"  data-downloadable="yes" data-duration="00:20">
+				<p><span style="font-weight:bold;">Bass Kleph, Chris Arnott, Tommy Trash</span> - We Feel Love (Daleri Bootleg)</p>
+			</li>
+			<li data-path="content/mp3/07.mp3"  data-downloadable="yes" data-duration="02:33">
+				<p><span style="font-weight:bold;">Alina Baraz & Galimatias</span> - Pretty Thoughts</p>
+			</li>
+			<li data-path="content/mp3/08.mp3"  data-downloadable="yes" data-duration="02:41">
+				<p><span style="font-weight:bold;">Der Rauber Und Der Prinz</span> - Jagd Auf Den Hirsch (Guti remix) DESOLAT 2010</p>
+			</li>
+			<li data-path="content/mp3/09.mp3"  data-downloadable="yes" data-duration="02:36">
+				<p><span style="font-weight:bold;">Great Good Fine Ok</span> - You're The One For Me (option4 remix)</p>
+			</li>
+			<li data-path="content/mp3/10.mp3"  data-downloadable="yes" data-duration="03:15">
+				<p><span style="font-weight:bold;">Childish Gambino</span> - Crawl (Produced By Christian Rich and Donald Glover)</p>
+			</li>
+			<li data-path="http://mp3.trb-stream.net/;.mp3"  data-downloadable="no" data-duration="00:00">
+				<p><span style="font-weight:bold; color:#FF0000;">SHOUTCAST EXAMPLE</span> - it really works :) - http://mp3.trb-stream.net/;.mp3</p>
+			</li>
+		</ul>
+	
+	</body>
+</html>
+
+
+
+

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1"/>
+	
+	<title>MP3 Light Player</title>
+	
+	<link rel="stylesheet" type="text/css"  href="css/page-white.css"/>
+	<link rel="stylesheet" type="text/css"  href="content/global.css"/>
+	
+	<script type="text/javascript" src="java/FWDMLP.js"></script>
+	
+	<style> 
+		body{
+			background-color:#666666;
+		}
+		
+		#myDiv{
+			margin:auto;
+		}
+	</style>
+	
+	
+	<script type="text/javascript">
+		FWDMLPUtils.onReady(function(){
+			new FWDMLP({
+				//main settings
+				instanceName:"player1",
+				parentId:"myDiv",
+				playlistsId:"playlists",
+				mainFolderPath:"content",
+				skinPath:"clasic_skin_white",
+				facebookAppId:"213684265480896",//required only if the facebook share button is used
+				showSoundCloudUserNameInTitle:"yes",
+				useDeepLinking:"yes",
+				rightClickContextMenu:"developer",
+				showButtonsToolTips:"yes",
+				autoPlay:"yes",
+				loop:"no",
+				shuffle:"no",
+				maxWidth:500,
+				volume:.8,
+				toolTipsButtonsHideDelay:1.5,
+				toolTipsButtonFontColor:"#333333",
+				//controller settings
+				animateOnIntro:"yes",
+				showSoundAnimation:"yes",
+				showLoopButton:"yes",
+				showShuffleButton:"yes",
+				showDownloadMp3Button:"yes",
+				showFacebookButton:"yes",
+				addCountingToTracks:"yes",
+				expandBackground:"yes",
+				tracksCountingColor:"#FFFFFF",
+				tracksCountingLineColor:"#FFFFFF",
+				titleColor:"#FFFFFF",
+				timeColor:"#FFFFFF",
+				//controller align and size settings (described in detail in the documentation!)
+				controllerHeight:117,
+				startSpaceBetweenButtons:5,
+				allButtonsOffsetTopAndBottom:20,
+				spaceBetweenMainScrubberAndTime:6,
+				startTimeSpace:10,
+				scrubbersOffsetWidth:1,
+				scrubbersOffestTotalWidth:-6,
+				scrubberOffsetBottom:9,
+				equlizerOffsetLeft:2,
+				//playlists window settings
+				showPlaylistsButtonAndPlaylists:"yes",
+				showPlaylistsByDefault:"no",
+				forceDisableDownloadButtonForPodcast:"yes",
+				forceDisableDownloadButtonForOfficialFM:"yes",
+				forceDisableDownloadButtonForFolder:"yes",
+				thumbnailSelectedType:"threshold",
+				startAtPlaylist:0,
+				startAtTrack:0,
+				buttonsMargins:0,
+				thumbnailMaxWidth:330, 
+				thumbnailMaxHeight:330,
+				horizontalSpaceBetweenThumbnails:40,
+				verticalSpaceBetweenThumbnails:40,
+				//popup settings
+				showPopupButton:"yes",
+				popupWindowBackgroundColor:"#FFFFFF",
+				popupWindowWidth:500,
+				popupWindowHeight:117
+			});
+		})
+	</script>
+</head>
+
+<body>
+	
+	<!-- player holder -->
+	<div id="myDiv"></div>
+	
+	<!--  Playlists -->
+	<ul id="playlists" style="display:none;">
+		<li data-source="playlist1"  data-thumbnail-path="content/thumbnails/large1.jpg">
+			<p class="minimalWhiteCategoriesTitle"><span class="boldWhite">Title: </span>My playlist 1</p>
+			<p class="minimalWhiteCategoriesType"><span class="boldWhite">Type: </span><span class="minimalWhiteCategoriesTypeIn">HTML</span></p>
+			<p class="minimalWhiteCategoriesDescription"><span class="boldWhite">Description: </span>This playlist is created using html elements.</p>
+		</li>
+		
+		<li data-source="http://www.kingola.com/feed/podcast/" data-thumbnail-path="content/thumbnails/large2.jpg">
+			<p class="minimalWhiteCategoriesTitle"><span class="boldWhite">Title: </span>My playlist 2</p>
+			<p class="minimalWhiteCategoriesType"><span class="boldWhite">Type: </span><span class="minimalWhiteCategoriesTypeIn">PODCAST</span></p>
+			<p class="minimalWhiteCategoriesDescription"><span class="boldWhite">Description: </span>This playlist is created using a podcast URL.</p>
+		</li>
+		
+		<li data-source="https://soundcloud.com/theworldofnick/sets/trap" data-thumbnail-path="content/thumbnails/large3.jpg">
+			<p class="minimalWhiteCategoriesTitle"><span class="boldWhite">Title: </span>My playlist 3</p>
+			<p class="minimalWhiteCategoriesType"><span class="boldWhite">Type: </span><span class="minimalWhiteCategoriesTypeIn">SOUNDCLOUD</span></p>
+			<p class="minimalWhiteCategoriesDescription"><span class="boldWhite">Description: </span>This playlist is created using a SoundCloud playlist URL.</p>
+		</li>
+		
+		<li data-source="http://www.webdesign-flash.ro/p/msp/content/playlist1.xml" data-thumbnail-path="content/thumbnails/large4.jpg">
+			<p class="minimalWhiteCategoriesTitle"><span class="boldWhite">Title: </span>My playlist 4</p>
+			<p class="minimalWhiteCategoriesType"><span class="boldWhite">Type: </span><span class="minimalWhiteCategoriesTypeIn">XML</span></p>
+			<p class="minimalWhiteCategoriesDescription"><span class="boldWhite">Description: </span>This playlist is created using a XML file.</p>
+		</li>	
+		
+		<li data-source="official.fm/YrOG"  data-thumbnail-path="content/thumbnails/large5.jpg">
+			<p class="minimalWhiteCategoriesTitle"><span class="boldWhite">Title: </span>My playlist 5</p>
+			<p class="minimalWhiteCategoriesType"><span class="boldWhite">Type: </span><span class="minimalWhiteCategoriesTypeIn">OFFICIAL.FM</span></p>
+			<p class="minimalWhiteCategoriesDescription"><span class="boldWhite">Description: </span>This playlist is created using an official.fm playlist URL.</p>
+		</li>
+		
+		<li data-source="folder:mp3" data-thumbnail-path="content/thumbnails/large6.jpg">
+			<p class="minimalWhiteCategoriesTitle"><span class="boldWhite">Title: </span>My playlist 6</p>
+			<p class="minimalWhiteCategoriesType"><span class="boldWhite">Type: </span><span class="minimalWhiteCategoriesTypeIn">FOLDER</span></p>
+			<p class="minimalWhiteCategoriesDescription"><span class="boldWhite">Description: </span>This playlist is created from a folder with mp3 files.</p>
+		</li>
+	</ul>
+		
+	<!--  HTML playlist -->
+	<ul id="playlist1" style="display:none;">
+		<li data-path="content/mp3/01.mp3"   data-downloadable="yes">
+			<p><span style="font-weight:bold;">Yellow Claw & Tropkillaz</span> - Assets feat. The Kemist</p>
+		</li>
+		<li data-path="content/mp3/02.mp3"  data-downloadable="yes">
+			<p><span style="font-weight:bold;">MACKLEMORE & RYAN LEWIS vs MAJOR LAZER</span> -  can't hold us remix (ft swappi and 1st klase)</p>
+		</li>
+		<li data-path="content/mp3/03.mp3"  data-downloadable="yes">
+			<p><span style="font-weight:bold;">Crush ft. Camden Cox</span> - Could This Be Real (Luminox Remix)</p>
+		</li>
+	</ul>
+	
+	</body>
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>MP3 Light Player thumbnail example</title>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1 user-scalable=no" />
+		
+		<!--  Import required css and js files  -->
+		<link rel="stylesheet" type="text/css"  href="content/global.css"/>
+		<script type="text/javascript" src="java/FWDMLP.js"></script>
+	
+		<style type="text/css">
+			.thumbHolder{
+				position:absolute;
+				width:250px;
+				height:250px;
+				top:0px;
+			}
+			
+			.thumbHolder img{
+				postion:absolute;
+				width:250px;
+				height:250px;	
+			}
+			
+			.time{
+				position:absolute;
+				background-color:#AAAAAA;
+				padding-left:5px;
+				padding-right:5px;
+				left:5px;
+				top:210px;
+			}
+			
+			#myDiv{
+				margin-top:310px;
+			}
+		</style>
+	
+		<!-- Setup audio player-->
+		<script type="text/javascript">
+			FWDMLPUtils.onReady(function(){				
+				new FWDMLP({
+					//main settings
+					instanceName:"player1",
+					parentId:"myDiv",
+					playlistsId:"playlists",
+					mainFolderPath:"content",
+					skinPath:"minimal_skin_dark",
+					facebookAppId:"213684265480896",//required only if the facebook share button is used
+					showSoundCloudUserNameInTitle:"yes",
+					useDeepLinking:"yes",
+					rightClickContextMenu:"developer",
+					showButtonsToolTips:"yes",
+					autoPlay:"yes",
+					loop:"no",
+					shuffle:"no",
+					maxWidth:550,
+					volume:.8,
+					toolTipsButtonsHideDelay:1.5,
+					toolTipsButtonFontColor:"#333333",
+					
+					//controller settings
+					animateOnIntro:"yes",
+					showSoundAnimation:"yes",
+					showLoopButton:"yes",
+					showShuffleButton:"yes",
+					showDownloadMp3Button:"yes",
+					showFacebookButton:"yes",
+					expandBackground:"no",
+					addCountingToTracks:"yes",
+					tracksCountingColor:"#FFFFFF",
+					tracksCountingLineColor:"#999999",
+					titleColor:"#FFFFFF",
+					timeColor:"#5a5a5a",
+					//controller align and size settings (described in detail in the documentation!)
+					controllerHeight:103,
+					startSpaceBetweenButtons:5,
+					allButtonsOffsetTopAndBottom:14,
+					spaceBetweenMainScrubberAndTime:10,
+					startTimeSpace:10,
+					scrubbersOffsetWidth:2,
+					scrubbersOffestTotalWidth:0,
+					scrubberOffsetBottom:4,
+					equlizerOffsetLeft:1,
+
+					//playlists window settings
+					showPlaylistsButtonAndPlaylists:"yes",
+					showPlaylistsByDefault:"no",
+					forceDisableDownloadButtonForPodcast:"yes",
+					forceDisableDownloadButtonForOfficialFM:"yes",
+					forceDisableDownloadButtonForFolder:"yes",
+					thumbnailSelectedType:"opacity",
+					startAtPlaylist:0,
+					startAtTrack:0,
+					buttonsMargins:0,
+					thumbnailMaxWidth:350, 
+					thumbnailMaxHeight:350,
+					horizontalSpaceBetweenThumbnails:40,
+					verticalSpaceBetweenThumbnails:40,
+					
+					//popup settings
+					showPopupButton:"yes",
+					popupWindowBackgroundColor:"#000000",
+					popupWindowWidth:450,
+					popupWindowHeight:103
+				});
+				
+				//#######################//
+				/* Thumbnail code...
+				 * Please note thate we are using our own low level js library but the logic is simple
+				 * so you can use your own library or jQuery, the idea is to see how the API can be used 
+				 * with a thumbnails grid or sequence. 
+				*/
+				//#######################//
+				var thumb = null;
+				var catId = -1;
+				var trackId = -1;
+				var thumbnails_ar = FWDMLPUtils.getChildren(document.getElementById("mainThumbnailsHolder"));
+				var times_ar = [];
+				var totalThubnails = thumbnails_ar.length;
+
+				//initalize thumbnails and adding player event listeners
+				function initThumbnails(){
+					positionAndInitThumbails();
+					player1.addListener(FWDMLP.START, startHandler);
+					player1.addListener(FWDMLP.UPDATE_TIME, updateTimeHandler);
+				};
+
+				//postion and initalize thumbnails
+				function positionAndInitThumbails(){
+					var thumb;
+					var button;
+					for(var i=0; i<totalThubnails; i++){
+						thumb = thumbnails_ar[i];
+						button = FWDMLPUtils.getChildren(thumb)[1];
+						times_ar[i] = FWDMLPUtils.getChildren(thumb)[2];
+						thumb.setAttribute("data-id", i);
+						button.setAttribute("data-id", i);
+						button.innerHTML = "play track " + i + " from playlist 1";
+						thumb.style.left = (10 + (i * 260)) + "px";
+						thumb.style.top = "10px";
+						button.onclick = thumbnailButtonOnClick;
+					}
+				}
+
+				//player start handler
+				function startHandler(e){
+					//reset thumbnail time
+					if(thumb){
+						for(var i=0; i<times_ar.length; i++){
+							times_ar[i].innerHTML = "00:00/00:00";
+						}
+					}
+
+					//update thumbnail reference
+					catId = player1.getCatId();
+					trackId = player1.getTrackId();
+					
+					if(catId == 0 && trackId == 0){
+						thumb = thumbnails_ar[0];
+					}else if(catId == 0 && trackId == 1){
+						thumb = thumbnails_ar[1];
+					}else if(catId == 0 && trackId == 2){
+						thumb = thumbnails_ar[2];
+					}else{
+						thumb = null;
+					}
+				}
+
+				//update thumbnail time
+				function updateTimeHandler(e){
+					if(thumb){
+						times_ar[trackId].innerHTML =  e.curTime + "/" + e.totalTime
+					}
+				};
+
+				//play specfic track at thumbanil button click
+				function thumbnailButtonOnClick(e){
+					if(e.target.getAttribute("data-id") == 0){
+						player1.playSpecificTrack(0,0);
+					}else if(e.target.getAttribute("data-id") == 1){
+						player1.playSpecificTrack(0,1);
+					}else if(e.target.getAttribute("data-id") == 2){
+						player1.playSpecificTrack(0,2);
+					}
+				};
+
+				initThumbnails()
+				
+			});			
+		</script>
+	</head>
+
+	<body style="background-color:#555555;">
+	
+	<!-- thumbnails -->
+	<div id="mainThumbnailsHolder">
+		<div class="thumbHolder">
+			<img src="content/thumbnails/track1.jpg"/>
+			<button>play</button>
+			<p class="time">00:00/00:00</p>
+		</div>
+		<div class="thumbHolder">
+			<img src="content/thumbnails/track2.jpg"/>
+			<button>play</button>
+			<p class="time">00:00/00:00</p>
+		</div>
+		<div class="thumbHolder">
+			<img src="content/thumbnails/track3.jpg"/>
+			<button>play</button>
+			<p class="time">00:00/00:00</p>
+		</div>
+	</div>
+	
+	<!-- Player holder -->
+	<div id="myDiv"></div>
+	
+		
+	<!--  Playlists -->
+		<ul id="playlists" style="display:none;">
+			<li data-source="playlist1"  data-thumbnail-path="content/thumbnails/large1.jpg">
+				<p class="minimalDarkCategoriesTitle"><span class="bold">Title: </span>My playlist 1</p>
+				<p class="minimalDarkCategoriesType"><span class="bold">Type: </span><span class="minimalDarkCategoriesTypeIn">HTML</span></p>
+				<p class="minimalDarkCategoriesDescription"><span class="bold">Description: </span>This playlist is created using html elements.</p>
+			</li>
+			
+			<li data-source="http://www.kingola.com/feed/podcast/" data-thumbnail-path="content/thumbnails/large2.jpg">
+				<p class="minimalDarkCategoriesTitle"><span class="bold">Title: </span>My playlist 2</p>
+				<p class="minimalDarkCategoriesType"><span class="bold">Type: </span><span class="minimalDarkCategoriesTypeIn">PODCAST</span></p>
+				<p class="minimalDarkCategoriesDescription"><span class="bold">Description: </span>This playlist is created using a podcast URL.</p>
+			</li>
+			
+			<li data-source="https://soundcloud.com/theworldofnick/sets/trap" data-thumbnail-path="content/thumbnails/large3.jpg">
+				<p class="minimalDarkCategoriesTitle"><span class="bold">Title: </span>My playlist 3</p>
+				<p class="minimalDarkCategoriesType"><span class="bold">Type: </span><span class="minimalDarkCategoriesTypeIn">SOUNDCLOUD</span></p>
+				<p class="minimalDarkCategoriesDescription"><span class="bold">Description: </span>This playlist is created using a SoundCloud playlist URL.</p>
+			</li>
+			
+			<li data-source="http://www.webdesign-flash.ro/p/msp/content/playlist1.xml" data-thumbnail-path="content/thumbnails/large4.jpg">
+				<p class="minimalDarkCategoriesTitle"><span class="bold">Title: </span>My playlist 4</p>
+				<p class="minimalDarkCategoriesType"><span class="bold">Type: </span><span class="minimalDarkCategoriesTypeIn">XML</span></p>
+				<p class="minimalDarkCategoriesDescription"><span class="bold">Description: </span>This playlist is created using a XML file.</p>
+			</li>	
+			
+			<li data-source="official.fm/YrOG"  data-thumbnail-path="content/thumbnails/large5.jpg">
+				<p class="minimalDarkCategoriesTitle"><span class="bold">Title: </span>My playlist 5</p>
+				<p class="minimalDarkCategoriesType"><span class="bold">Type: </span><span class="minimalDarkCategoriesTypeIn">OFFICIAL.FM</span></p>
+				<p class="minimalDarkCategoriesDescription"><span class="bold">Description: </span>This playlist is created using an official.fm playlist URL.</p>
+			</li>
+			
+			<li data-source="folder:mp3" data-thumbnail-path="content/thumbnails/large6.jpg">
+				<p class="minimalDarkCategoriesTitle"><span class="bold">Title: </span>My playlist 6</p>
+				<p class="minimalDarkCategoriesType"><span class="bold">Type: </span><span class="minimalDarkCategoriesTypeIn">FOLDER</span></p>
+				<p class="minimalDarkCategoriesDescription"><span class="bold">Description: </span>This playlist is created from a folder with mp3 files.</p>
+			</li>
+		</ul>
+			
+		<!--  HTML playlist -->
+		<ul id="playlist1" style="display:none;">
+			<li data-path="content/mp3/01.mp3"   data-downloadable="yes">
+				<p><span style="font-weight:bold;">Yellow Claw & Tropkillaz</span> - Assets feat. The Kemist</p>
+			</li>
+			<li data-path="content/mp3/02.mp3"  data-downloadable="yes">
+				<p><span style="font-weight:bold;">MACKLEMORE & RYAN LEWIS vs MAJOR LAZER</span> -  can't hold us remix (ft swappi and 1st klase)</p>
+			</li>
+			<li data-path="content/mp3/03.mp3"  data-downloadable="yes">
+				<p><span style="font-weight:bold;">Crush ft. Camden Cox</span> - Could This Be Real (Luminox Remix)</p>
+			</li>
+		</ul>
+	
+	</body>
+	
+</html>
+
+
+
+

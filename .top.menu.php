@@ -1,0 +1,25 @@
+<?
+$aMenuLinks = Array(
+	Array(
+		"Главная", 
+		"/", 
+		Array(), 
+		Array(),
+		"" 
+	),
+	Array(
+		"Преподаватели", 
+		"/teachers/", 
+		Array(), 
+		Array("TYPE"=>"simple-list"),
+		"" 
+	),
+	Array(
+		"Контакты", 
+		"/contacs/", 
+		Array(), 
+		Array(), 
+		"" 
+	)
+);
+?>

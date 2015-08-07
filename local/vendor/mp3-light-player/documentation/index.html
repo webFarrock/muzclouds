@@ -1,0 +1,419 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<head lang="en">
+	<meta http-equiv="content-type" content="text/html;charset=utf-8">
+	<title>MP3 Light Player documentation.</title>
+	<!-- Framework CSS -->
+	<link rel="stylesheet" href="assets/blueprint-css/screen.css" type="text/css" media="screen, projection">
+	<link rel="stylesheet" href="assets/blueprint-css/print.css" type="text/css" media="print">
+	<!--[if lt IE 8]><link rel="stylesheet" href="assets/blueprint-css/ie.css" type="text/css" media="screen, projection"><![endif]-->
+	<link rel="stylesheet" href="assets/blueprint-css/viewers/fancy-type/screen.css" type="text/css" media="screen, projection">
+	<style type="text/css" media="screen">
+		p, table, hr, .box { margin-bottom:25px; }
+		.box p { margin-bottom:10px; }
+	</style>
+</head>
+
+
+<body>
+	<div class="container">
+	
+		<h3 class="center alt">&ldquo;MP3 Light Player &rdquo; Documentation by FWDesign</h3>
+		
+		<hr>
+		
+		<h1 class="center">&ldquo;<span class="center alt">MP3 Light Player</span>&rdquo;</h1>
+		
+		<div class="borderTop">
+			<div class="span-6 colborder info prepend-1">
+				<p class="prepend-top">
+					<strong>
+					Created: 05/10/2013<br>
+					By:© FWD (FLASH WEB DESIGN)<br>
+					Email: <a href="mailto:contact@webdesign-flash.ro">contact@webdesign-flash.ro</a>
+					</strong>
+				</p>
+			</div><!-- end div .span-6 -->		
+	
+			<div class="span-12 last">
+				<p class="prepend-top append-0">Thank you for purchasing our script. If you have any questions that are beyond the scope of this help file, please feel free to email via our email. Thanks so much!</p>
+			</div>
+		</div><!-- end div .borderTop -->
+		
+		<hr>
+		
+		<h2 id="toc" class="alt">Table of Contents</h2>
+		<ol class="alpha">
+			<li><a href="#important">Important notes read this before anything else.</a></li>
+			<li><a href="#preparingAudioFiles">Preparing the audio files.</a></li>
+			<li><a href="#shoutcast">Preparing SHOUTCAST.</a></li>
+			<li><a href="#instalation">How to install MP3 Light Player into your html page.</a></li>
+			<li><a href="#config">Constructor parameters.</a></li>
+			<li><a href="#cat">Setup playlists.</a></li>
+			<li><a href="#share">Setup facebook share button.</a></li>
+			<li><a href="#api">API.</a></li>
+			<li><a href="#credits">Sources and Credits</a></li>
+		</ol>
+	
+		<hr>
+		
+		<h3 id="important"><strong>A) Important notes make sure you read this!</strong> - <a href="#toc">top</a></h3>
+		<p>Please note that MLP installation and configuration is not complicated but because it has a lot of customizable settings it might seem complicated, please go through the entire documentation before trying to install it into your own page. Basically what it must be done is to copy some html code from the examples we provided and paste it into your own html page and of course add your own audio file.</p>
+		<p>The server is character case sensitive so make sure that the MLP settings are identical to those from the provided examples.</p>
+		<p style="color:#FF0000;">When using mp3 files located on your server with relative paths you must add all folders that contains mp3's in the content folder, this is extremely important in order for all features to work correctly.</p>
+		<p>The server is character case sensitive so make sure that MLP settings are identical to those from the provided examples.</p>
+		<p>Some of the  features will not work local like the share button or loading xml playlist file, this is normal behavior because most browser does not allow this, once uploaded on the server it will function properly.</p>
+		<p>When something is wrong with a MLP actions a red info box with the problem description will appear over it, please note that this box is there to help you understand the problem, for example if a mp3 file is not found the box will appear and inform you about the problem. The box can be closed when clicked or touched.</p>
+		<p>When testing local on IE7/IE8 or on an older browser that dose not support HTML5 audio it will not work because the flash (.swf) file is trying to comunicate with the browser and this is not allowed, of course it will work fine when tested online.</p>
+		<p>The MLP skin is constructed from .png images, only  a few settings for changing colors are possible like changing the title track color. If you want a different skin the .png files must be modified. The skin is really flexible this is allowing to skin the MLP as you like. We have a great designer in our team so if you need a custom skin please contact us!</p>
+		
+		<h3 id="preparingAudioFiles"><strong>B) Preparing the audio files.</strong> - <a href="#toc">top</a></h3>
+		<p>Currently all browsers except Opera have .mp3 support (this applies to desktop), on a mobile device all browsers have .mp3 support. On a browser that does not have .mp3 support the player will use flash. The good news is that the player will work only with .mp3 files there is no need to use other audio formats.</p>
+		
+		<h3 id="shoutcast"><strong>B) Preparing SHOUTCAST.</strong> - <a href="#toc">top</a></h3>
+		<p>In order to stream shoutcast instead on adding the mp3 file in the playlist add the shoutcast server address and at the end of it ;.mp3 , like this : http://95.141.24.224:80/;.mp3.  Adding the ;.mp3 at the end of the address will force the server to serve the mp3 stream instead of the http web page. Please note that this player has support only for mp3 stream and it will not work correctly with other formats like .acc or .ogg. The good news is that the player will play the stream on all browser no matter which operating system is used, this applies to both mobile and desktop.</p>
+
+		<h3 id="instalation"><strong>C) How to install MP3 Light Player into your html page.</strong> - <a href="#toc">top</a></h3>
+		<p>This is a small tutorial about how to install MLP into your page. MLP can be e embedded into a html page inside a div of your choosing, it will adapt it's width based on the <span class="boldLi">maxWidth</span> property specified in the constructor, the height is set based on the controller height, if the page is resized and the parent div width is smaller then the <span class="boldLi">maxWidth</span> property MLP will adapt its size accordingly.</p>
+		<p>In the download files there is a start folder and in this folder there are html files starting with the label "skin", each of this examples have exactly the same structure with different constructor settings you can use one of them to copy and paste the required html code based on skin that you need, I will use the skin-minimal-dark.html as an example for this tutorial.</p>
+		<p>The skin is created using javascript and .png images, if you want a custom skin please contact us. If you want to create a skin of your own modify the ones we already provided.</p>
+		
+		<ul>
+			<li>Copy and paste the content folder and the java folder into the same folder with your .html file, inside the content folder there are other folders which are self explanatory. Keep only the skin folders that you need to save space on the server.</li>
+			<li>Open skin-minimal-dark.html with a text editor.</li>
+			<li>The javascript and css files must be imported, in the head section of your html file add the code from the below image. Please note that the .css file is used to style the playlists thumbnails description text.</li>
+			<img src="assets/images/script.jpg"></img>
+			<li>You need a div into which MLP will be added as a child, so create a div and set an id for it, the id is important because it is passed in the MLP constructor, make sure it is unique. The MLP is responsive as follows, the width will adapt based on the <span class="boldLi">maxWidth</span> property specified in the constructor, the height is set based on the skin height, if the page is resized and the parent div width is smaller then the <span class="boldLi">maxWidth</span> property the MLP will adapt its size accordingly.</li>
+			<img src="assets/images/div.jpg"></img>
+			<li>Next step is to set up the playlists, to do this copy and paste the <span class="boldLi">ul</span> element with the id <span class="boldLi">playlists</span> into the body element, this id is passed into the constructor property <span class="boldLi">playlistsId</span>, this is how the playlist is identified. Ilustrated below, please note that the code from the image is minified to save space. For more info about playlists please read <a href="#cat">Setup playlists.</a> </li>
+			<img src="assets/images/categories.jpg"></img>
+			<li>Next step is to initialize the MLP with javascript, in the head section of your html page add the code from the below image. Please note that all parameters are described in the <a href="#config">constructor parameters</a> section.</li>
+			<img src="assets/images/instantiate.jpg"></img>
+        </ul>   
+		<p>This is how MLP is installed in a HTML page, please read the  <a href="#config">Constructor parameters</a> section to understand the MLP properties</p>
+		
+		<h3 id="config"><strong>D) Constructor parameters.</strong> - <a href="#toc">top</a></h3>
+		<p>Please open any of the .html files provided with a text editor as reference.</p>
+		<p>These parameters represents the possible setting for MLP they are all visible in the below image and described below.</p>
+		<img src="assets/images/instantiate.jpg"></img>
+		
+		<p>//-- main settings --//</p>
+		<ul>
+        	<li><span class="boldLi">instanceName</span>:"player1" - The player instance name, trough this instance the API is called for example if the instance name is "player1" and if you want to call play of this instance it is called like this player1.play();. Please note that the instance name must be unique for each instance.</li>
+			<li><span class="boldLi">parentId</span>:"myDiv" - The id of the div into which the MLP is added, this id must be unique for each instance.</li>
+			<li><span class="boldLi">playlistsId</span>:"playlists" - The id of the <span class="boldLi">ul</span> html element that represents the playlists, for more info please read <a href="#cat">Setup playlists.</a>.</li>
+			<li><span class="boldLi">skinPath</span>:"content/minimal_skin_dark" - The skin path, the folder that contains the skin graphics.</li>
+			<li><span class="boldLi">mainFolderPath</span>:"content" - The main folder path. This folder contains some important files like the php files and the mp3 files, in this folder you need to add your mp3 folders or mp3 files.</li>
+			<li><span class="boldLi">skinPath</span>:"minimal_skin_dark" - The skin folder path, the path for the skin that you want to use.</li>
+			<li><span class="boldLi">facebookAppId</span>:"213684265480896" - this represents the APP id used by facebook to share tracks, for more info about how to get your own facebook APP id and setup facebook share button please read <a href="#share">Setup facebook share button</a>.</li>
+			<li><span class="boldLi">showSoundCloudUserNameInTitle</span>:"yes" - this can be yes or no, show or not show the username in the track title, the username is added at the beggining of the track title and separated by "-" like this: <span class="boldLi">username - track title</span>.</li>
+			<li><span class="boldLi">useDeepLinking</span>:"yes" - this can be yes or no. Allow or not deeplinking, if deeplinking is disabled the facebook share button will share the current page url.</li>
+			<li><span class="boldLi">rightClickContextMenu</span>:"default" - this can be developer, default or disabled. We would appreciate it if you can leave this feature set to developer.</li>
+			<li><span class="boldLi">showButtonsToolTips</span>:"yes" - this can be yes or no.</li>
+			<li><span class="boldLi">autoPlay</span>:"yes" - this can be yes or no.</li>
+			<li><span class="boldLi">loop</span>:"no" - this can be yes or no.</li>
+			<li><span class="boldLi">shuffle</span>:"no" - this can be yes or no.</li>
+			<li><span class="boldLi">maxWidth</span>:750 - a number that represents the player maximum width in px, think of this property as it would be the max-width css property.</li>
+			<li><span class="boldLi">volume</span>:.5 - A number from 0.1 to 1 that represents the volume level.</li>
+			<li><span class="boldLi">toolTipsButtonsHideDelay</span>:1.5 - A float number that represents the duration in seconds until the tooltip button is showed on mouse hover.</li>
+			<li><span class="boldLi">toolTipsButtonFontColor</span>:"#FFFFFF" - The tooltips button font color.</li>
+		</ul>
+		
+		//-- controller settings --//
+		<ul>
+			<li><span class="boldLi">animateOnIntro</span>:"yes" - this can be yes or no, if this is set to yes once the MLP is loaded and ready the controller will animate with a tween from top to bottom otherwise will appear without any animation, please note that this option also apply to the playlist.</li>
+			<li><span class="boldLi">showSoundAnimation</span>:"yes" - this can be yes or no. Hide or show the equalizer animation.</li>
+			<li><span class="boldLi">showLoopButton</span>:"yes" - this can be yes or no. Hide or show the loop button.</li>
+			<li><span class="boldLi">showShuffleButton</span>:"yes" - this can be yes or no. Hide or show the shuffle button.</li>
+			<li><span class="boldLi">showFacebookButton</span>:"yes" - this can be yes or no. Hide or show the facebook button.</li>
+			<li><span class="boldLi">addCountingToTracks</span>:"yes" - this can be yes or no. Add or not counting to the track title.</li>
+			<li><span class="boldLi">tracksCountingColor</span>:"#FFFFFF" - the tracks counting color.</li>
+			<li><span class="boldLi">tracksCountingLineColor</span>:"#FFFFFF" - the tracks counting line color, the line between the counting and track title.</li>
+			<li><span class="boldLi">titleColor</span>:"#FFFFFF" - the title color.</li>
+			<li><span class="boldLi">timeColor</span>:"#5a5a5a" - the current and total time color.</li>
+			<li><span class="boldLi">controllerHeight</span>:70 - the controller height in pixels.</li>
+			<li><span class="boldLi">startSpaceBetweenButtons</span>:10 - a number that represents the space between buttons in pixels, ilustrated below with the red arrows.</li>
+			<img src="assets/images/startSpaceBetweenButtons.jpg"/>
+			<li><span class="boldLi">allButtonsOffsetTopAndBottom</span>:10 - a number that represents the buttons offset top and bottom in pixels, you can think of this as margin top and bottom for the buttons, ilustrated in the below image with the red arrows (please note that this option will only affect the MLP if it is in minified mode).</li>
+			<img src="assets/images/allButtonsOffsetTopAndBottom.jpg"/>
+			<li><span class="boldLi">spaceBetweenMainScrubberAndTime</span>:10 - a number that represents the space between the time and main scrubbar in pixels, ilustrated below with the red arrows.</li>
+			<img src="assets/images/spaceBetweenMainScrubberAndTime.jpg"/>
+			<li><span class="boldLi">startTimeSpace</span>:10 - a number that represents the start space in pixels for the total and current time, you can think of this as margin left and right, ilustrated in the below image with the red arrows (please note that this option will only affect the MLP if it is in minified mode).</li>
+			<img src="assets/images/startTimeSpace.jpg"/>
+			<li><span class="boldLi">scrubbersOffsetWidth</span>:10 - a number that represents the total amount in pixels removed from the scrubber bars progress line when they are at the end (change number to understand it better, useful based on the skin type).</li>
+			<li><span class="boldLi">scrubbersOffestTotalWidth</span>:10 - a number that represents the total amount in pixels added to the entire scrubber bar (change number to understand it better, useful based on the skin type).
+			</li>
+			<li><span class="boldLi">scrubberOffsetBottom</span>:10 - a number that represents the a bottom offset in pixels for the volume button and volume scrubber, you can think of this as margin bottom, ilustrated in the below image with the red arrows (please note that this option will only affect the MLP if it is in minified mode).</li>
+			<img src="assets/images/scrubberOffsetBottom.jpg"/>
+		</ul>
+		
+		<p>//-- playlists window settings --//</p>
+		<ul>
+			<li><span class="boldLi">showPlaylistsButtonAndPlaylists</span>:"yes" - this can be yes or no, disable or enable the playlists button and playlists window.</li>
+			<li><span class="boldLi">showPlaylistsByDefault</span>:"yes" - this can be yes or no, if this is set to yes the playlists window is showed as soon as the MLP is loaded and displayed.</li>
+			<li><span class="boldLi">forceDisableDownloadButtonForPodcast</span>:"yes" - this can be yes or no, force to disable or not the download button when the playlist is loaded from a podcast.</li>
+			<li><span class="boldLi">forceDisableDownloadButtonForOfficialFM</span>:"yes" - this can be yes or no, force to disable or not the download button when the playlist is loaded from official.fm.</li>
+			<li><span class="boldLi">forceDisableDownloadButtonForFolder</span>:"yes" - this can be yes or no, force to disable or not the download button when the playlist is loaded from mp3 folder.</li>
+			<li><span class="boldLi">thumbnailSelectedType</span>:"threshold" - this can be threshold, opacity or blackAndWhite, it represents the playlist thumbnail selected state (please note that this setting is always opacity when tested local or on a mobile device).</li>
+			<li><span class="boldLi">startAtPlaylist</span>:0 - a number that represents the playlist number that will be loaded when the MLP loads the first time, if deeplinking is used and the browser url has a playlist link this option is ignored. The playlists count starts from 0 (zero).</li>
+			<li><span class="boldLi">thumbnailMaxWidth</span>:330 - a number that represents the thumbnail maximum width, the width of the thumbnail will vary based on the available space but it will never be higher then this option.</li>
+			<li><span class="boldLi">thumbnailMaxHeight</span>:330 - a number that represents the thumbnail maximum width in pixels, the height of the thumbnail will vary based on the available space but it will never be higher then this option.</li>
+			<li><span class="boldLi">horizontalSpaceBetweenThumbnails</span>:40 - a number that represents the horizontal space in pixels between thumbnails.</li>
+			<li><span class="boldLi">verticalSpaceBetweenThumbnails</span>:40 - a number that represents the vertical space in pixels between thumbnails.</li>
+		</ul>
+		
+		//-- popup settings --//
+		<ul>
+			<li><span class="boldLi">showPopupButton</span>:"yes" - this can be yes or no.</li>
+			<li><span class="boldLi">showPlaylistItemPlayButton</span>:"yes" - this can be yes or no. Hide or show the small play/pause button that appear over a playlist item.</li>
+			<li><span class="boldLi">popupWindowWidth</span>:750 - the popup window width in pixels.</li>
+			<li><span class="boldLi">openerEqulizerOffsetTop</span>:347 - the popup window height in pixels.</li>
+		</ul>
+		
+		<h3 id="cat"><strong>Setup playlists.</strong> - <a href="#toc">top</a></h3>
+		<p>Open with a text editor one of the html files files starting with the label "skin" as reference.</p>
+
+		<p>Setting up the playlist window is simple, an <span class="boldLi">ul</span> tag must be added in the body tag, this
+		<span class="boldLi">ul</span> tag must have an unique id that is passed as a value to the MLP constructor as follows <span class="boldLi">playlistsId:</span>"unique-id", in the examples provided the id is "playlists" but it can be have any value as long as it is unique.</p>
+
+		<p>To add/remove a playlist  an <span class="boldLi">li</span> tags must be added/removed inside the playlists <span class="boldLi">ul</span> tag, this is illustrated in the below image. The MLP supports unlimited playlists but at least one playlist is required!.</p>
+		<img src="assets/images/playlists.jpg"></img>
+		
+		<p>There are five playlist type as follow: <span class="boldLi">HTML, PODCAST, XML, SOUNDCLOUD  and OFFICIAL.FM playlist</span> . Each of this type of playlists are explained in detail below.</p>
+		
+		<h3>SoundCloud playlist.</h3>
+		<p>To add/remove this type of playlist in the playlists add or remove the code from the below image into the playlists <span class="boldLi">ul</span> tag. The <span class="boldLi">data-source</span> represents the url of a SoundCloud playlist. The other attributes are self explanatory.</p>
+		<img src="assets/images/soundcloud.jpg"></img>
+		
+		<h3>OFFICIAL.FM playlist.</h3>
+		<p>To add/remove this type of playlist in the playlists add or remove the code from the below image into the playlists <span class="boldLi">ul</span> tag. The <span class="boldLi">data-source</span> represents the custom string plus the the playlist id. An official.fm playlist url looks something like this "http://www.official.fm/playlists/<span class="boldLi">yrOG</span>?from=homepage&track_id=MjH0", what you need to get from the url is the playlist id showed in bold and add it after the special string like this <span class="boldLi">official.fm/yrOG</span>.</p>
+		<img src="assets/images/officialfm.jpg"></img>
+		
+		<h3>HTML playlist.</h3>
+		<p>To add/remove this type of playlist in the playlists add or remove the code from the below image into the playlists <span class="boldLi">ul</span> tag.The <span class="boldLi">data-source</span> represents the id of the playlist <span class="boldLi">ul</span> element. The other attributes are self explanatory.</p>
+		<img src="assets/images/html-playlist.jpg"></img>
+		<p>To construct this type of playlist add the code from the below image inside the body HTML element. The code sample is self explanatory. To add/remove tracks add/remove <span class="boldLi">li</span>  HTML elements with the <span class="boldLi">data-path</span> attribute.</p>
+		<img src="assets/images/html-playlistex.jpg"></img>
+		
+		<h3>FOLDER playlist.</h3>
+		<p>To add/remove this type of playlist add or remove the code from the below image into the playlists <span class="boldLi">ul</span> tag.The <span class="boldLi">data-source</span> represents path of the mp3's folder (please note that this type of playlist can only be loaded form the same domain on which the html page resides, also the foler path must be relative to the path of the "proxyFolderPath.php", what this means is that your mp3's folder must be in the same folder or subfolder with the "proxyFolderPath.php" file ). The other attributes are self explanatory.</p>
+		<p>When adding the folder path to the <span class="boldLi">data-source</span> attribute a special string must be added before it, this string value is <span class="boldLi">folder:</span>, so for example if the mp3's folder path is <span class="boldLi">myFolder</span> the final string must look like this <span class="boldLi">folder:myFolder</span>. For a folder with a mp3's subfolder ex: <span class="boldLi">myFolder/myMp3Folder</span> the final string must look like this <span class="boldLi">folder:myFolder/myMp3Folder</span> .</p>
+		<img src="assets/images/folder-playlist.jpg"></img>
+		
+		<h3>XML playlist.</h3>
+		<p>To add/remove this type of playlist in the playlists add or remove the code from the below image into the playlists <span class="boldLi">ul</span> tag. The <span class="boldLi">data-source</span> represents the path of the XML file. Please note that the XML path must be absolute, ex: http://www.domain.com/xmlFile.xml. The other attributes are self explanatory. Please note that the XML file does not allow special characters like "&", if you need to use this type of character numeric characters are required, a useful table with all this special characters can be found  <a href="http://www.dvteclipse.com/documentation/svlinter/How_to_use_special_characters_in_XML.3F.html" target="_blank">at this url</a>.</p>
+		<img src="assets/images/xml-playlist.jpg"></img>
+		<p>To construct this type of playlist create an XML file with the same structure as the one from the below image (a sample XML file is included in the <span class="boldLi">content</span> folder). The code sample is self explanatory. To add/remove tracks add/remove <span class="boldLi">li</span> elements with the <span class="boldLi">data-path</span> attribute. If you don't need a thumbnail or duration remove the <span class="boldLi">data-thumbpath</span> and <span class="boldLi">data-duration</span> attributes.</p>
+		<img src="assets/images/xml-playstex.jpg"></img>
+		
+		<h3>PODCAST playlist.</h3>
+		<p>To add/remove this type of playlist in the playlists add or remove the code from the below image into the playlists <span class="boldLi">ul</span> tag. The <span class="boldLi">data-source</span> represents the path of the PODCAST url.</p>
+		<img src="assets/images/podcast-playlist.jpg"></img>
+		
+		<h3 id="share"><strong>Setup facebook share button.</strong> - <a href="#toc">top</a></h3>
+		<p>In order for the facebook share button to function a facebook app key is required, this key is obtained by setting up a facebook app as follows:</p>
+
+		<ul>
+			<li> Login into your facebook account.</li>
+			<li> Open the following link  https://developers.facebook.com/apps.</li>
+			<li> From the top bar menu select  <span class="boldLi">Apps - > Create New App</span> button and complete the fields, it's not important the values passed to the display name and namespace fields, the only requirement is that in the category drop down box to select "Apps for pages".</li>
+			<li> A new page will appear, in this page from the left menu bar select <span class="boldLi">Settings</span>. The <span class="boldLi">Settings</span> page will open, in this page the App ID is displayed, this id must be passed into the MLP constructor as follows <span class="boldLi">facebookAppId</span>:your app id here, example in the below image.</li>
+		</ul>
+		<img src="assets/images/firstFacebookScreen.jpg"/>
+		<ul>
+			<li>Next step is to click the <span class="boldLi">Add Platform</span> button and from the popup window click on the <span class="boldLi">Website</span> icon.</li>
+			<li> A new entry will be added in the <span class="boldLi">Settings</span> page labeled <span class="boldLi">Website</span>, in this tab set the <span class="boldLi">Site URL</span> and the <span class="boldLi">Mobile Site URL</span> to the domain name where the player is uploaded, example in the below image.</li>
+			<li>After this additions make sure you save the changes by pressing the <span class="boldLi">Save Changes</span> button.</li>
+		</ul>
+		<img src="assets/images/domain.jpg"/>
+		<ul>
+			<li>Last step is to select from the left menu bar <span class="boldLi">Status  & Review</span>, in this page there is a button that is reffering to "Do you want to make this app and all its live features available to the general public?" that must be set to yes, example in the below image.</li>
+		</ul>
+		<img src="assets/images/facebookYesButton.jpg"/>
+		
+		<p>One important thing to note is that the MLP url must be identical with the url passed to the facebook app, for example if the MLP url is <span class="boldLi">http://www.some-domain.com</span> and the facebook app is configured with the url <span class="boldLi">http://some-domain.com</span> it will not work, both url must be exactly the same.</p>
+		
+	    <h3 id="api"><strong>API.</strong> - <a href="#toc">top</a></h3>
+		<p>Inside the donwload files there is HTML file called API-example.html, in this file I have added all events and methods for reference, open the page source to see them. Full reference below. Please note that the properties are read only and they can only be written in the consturctor for more info about this please read the <a href="#config">Constructor parameters</a> section.</p>
+		
+		<p CLASS="largeLabel1">API - public methods:</p>
+			<table>
+				  <tr class="firstTr">
+					<th class="fistTd">Function</td>
+					<th class="secondTd">Method</td>
+					<th class="thirdTd">Description</td>
+				  </tr>
+				  
+				  <tr>
+					<td><p class="mainProp">loadPlaylist</p></td>
+					<td class="prop"><span class="inlineSpan">loadPlaylist(playlistId)</span>:void</td>
+					<td class="lastCol">Load a playlist based on id, the playlist count starts from 0.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">showCategories</p></td>
+					<td class="prop"><span class="inlineSpan">showCategories()</span>:void</td>
+					<td class="lastCol">Show the playlist selector window.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">showPlaylist</p></td>
+					<td class="prop"><span class="inlineSpan">showPlaylist()</span>:void</td>
+					<td class="lastCol">Show the playlist.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">hidePlaylist</p></td>
+					<td class="prop"><span class="inlineSpan">hidePlaylist()</span>:void</td>
+					<td class="lastCol">Hide the playlist.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">share</p></td>
+					<td class="prop"><span class="inlineSpan">share()</span>:void</td>
+					<td class="lastCol">Share current track on facebook.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">setVolume</p></td>
+					<td  class="prop"><span class="inlineSpan">setVolume( Number )</span>:void</td>
+					<td class="lastCol">Set the audio volume, this method accepts a parameter that represents a number between 0 (audio mute state) and 1 (audio maximum volume).</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">scrub</p></td>
+					<td class="prop"><span class="inlineSpan">scrub( Number )</span>:void</td>
+					<td class="lastCol">Notify instance to scrub (set the audio position), this method accepts a parameter that represents a number between 0 (audio start position) and 1 (audio end position).</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">stop</p></td>
+					<td class="prop"><span class="inlineSpan">stop()</span>:void</td>
+					<td class="lastCol">Stops the playback and the loading process if the loading process has started.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">play</p></td>
+					<td class="prop"><span class="inlineSpan">play()</span>:void</td>
+					<td class="lastCol">Start / play playback.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">pause</p></td>
+					<td class="prop"><span class="inlineSpan">pause()</span>:void</td>
+					<td class="lastCol">Pause the playback.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">playPrev</p></td>
+					<td class="prop"><span class="inlineSpan">playPrev()</span>:void</td>
+					<td class="lastCol">Play previous track.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">playNext</p></td>
+					<td class="prop"><span class="inlineSpan">playNext()</span>:void</td>
+					<td class="lastCol">Play next track.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">playShuffle</p></td>
+					<td class="prop"><span class="inlineSpan">playShuffle()</span>:void</td>
+					<td class="lastCol">Play shuffle track.</td>
+				  </tr>
+				</table>
+				
+				<p CLASS="largeLabel1">API - event listeners:</p>
+				<table>
+				  <tr class="firstTr">
+					<th class="fistTd">Event</td>
+					<th class="secondTd">Prefix</td>
+					<th class="thirdTd">Description</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">ready</p></td>
+					<td><p class="inlineSpan">FWDAudioPlayer.READY</p></td>
+					<td class="lastCol">Dispatched when the MLP instance API is actually available.</td>
+				  </tr>
+				   <tr>
+					<td><p class="mainProp">start</p></td>
+					<td><p class="inlineSpan">FWDAudioPlayer.START</p></td>
+					<td class="lastCol">Dispatched when the Mp3 playing has started.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">popup</p></td>
+					<td><p class="inlineSpan">FWDAudioPlayer.POPUP</p></td>
+					<td class="lastCol">Dispatched when the player is pop-uped in a new window.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">error</p></td>
+					<td><p class="inlineSpan">FWDAudioPlayer.ERROR</p></td>
+					<td class="lastCol">Dispatched when the MLP instance can't load or play the audio file, this event has a property of type string that represents the error message.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">startToLoadPlaylist</p></td>
+					<td><p class="inlineSpan">FWDMP3LightPlayer.START_TO_LOAD_PLAYLIST</p></td>
+					<td class="lastCol">Dispatched when the playlist loading has started.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">playlistLoadCompleteHandler</p></td>
+					<td><p class="inlineSpan">FWDMP3LightPlayer.LOAD_PLAYLIST_COMPLETE</p></td>
+					<td class="lastCol">Dispatched when the playlist loading is complete.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">stop</p></td>
+					<td><p class="inlineSpan">FWDAudioPlayer.STOP</p></td>
+					<td class="lastCol">Dispatched when the MLP instance is stopped.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">play</p></td>
+					<td><p class="inlineSpan">FWDAudioPlayer.PLAY</p></td>
+					<td class="lastCol">Dispatched when the MLP instance playback start to play.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">pause</p></td>
+					<td><p class="inlineSpan">FWDAudioPlayer.PAUSE</p></td>
+					<td class="lastCol">Dispatched when the MLP instance playback is paused.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">update</p></td>
+					<td><p class="inlineSpan">FWDAudioPlayer.UPDATE</p></td>
+					<td class="lastCol">Dispatched when the MLP instance is playing and it's position is changing (useful to update a custom scrub bar), this event has a property of type number between 0 (audio start position) and 1 (audio end position).</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">updateTime</p></td>
+					<td><p class="inlineSpan">FWDAudioPlayer.UPDATE_TIME</p></td>
+					<td class="lastCol">Dispatched when the MLP instance current duration is changing. This event has two properties of type string curTime and totalTime.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">playComplete</p></td>
+					<td><p class="inlineSpan">FWDAudioPlayer.PLAY_COMPLETE</p></td>
+					<td class="lastCol">Dispatched when the MLP instance playback has reached the end of the audio file.</td>
+				  </tr>
+				</table>
+				
+				<p CLASS="largeLabel1">API - methods:</p>
+				<table>
+				  <tr class="firstTr">
+					<th class="fistTd">Name</td>
+					<th class="secondTd">Method</td>
+					<th class="thirdTd">Description</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">getIsAPIReady</p></td>
+					<td><p class="inlineSpan">getIsAPIReady():Boolean</p></td>
+					<td class="lastCol">Returns the API state, true if ready, false if not.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">getCatId</p></td>
+					<td><p class="inlineSpan">getCatId():Number</p></td>
+					<td class="lastCol">Returns the current category id, the counting starts form 0.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">getTrackId</p></td>
+					<td><p class="inlineSpan">getTrackId():Number</p></td>
+					<td class="lastCol">Returns the current track id, the counting starts form 0.</td>
+				  </tr>
+				 
+				</table>
+		
+        <h3 id="credits"><strong>F) Sources and Credits</strong> - <a href="#toc">top</a></h3>
+        <p>This component was made by Tibi from FWD (FWDesign) <a href="http://www.webdesign-flash.ro">FLASH WEB DESIGN</a>, for more information and support contact us at <a href="mailto:youremail@yourdomain.com">contact@webdesign-flash.ro</a></p>
+		<p>Once again, thank you so much for purchasing this item. As I said at the beginning, I'd be glad to help you if you have any questions regarding this MLP and I'll do my best to assist.</p> 
+		
+		<p class="append-bottom alt large"><strong>FWDesign</strong></p>
+		<p><a href="#toc">Go To Table of Contents</a></p>
+		
+		<hr class="space">
+	</div><!-- end div .container -->
+</body>
+</html>
+
+</script>
