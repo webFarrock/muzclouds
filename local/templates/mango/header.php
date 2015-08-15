@@ -40,23 +40,21 @@
 <div id="content-block">
 
 <div class="content-center fixed-header-margin">
-<!-- HEADER -->
+
 <div class="header-wrapper style-3">
-<header class="type-1">
-	<?$APPLICATION->IncludeFile('/local/includes/mango/header-top.php');?>
-	<?$APPLICATION->IncludeFile('/local/includes/mango/header-middle.php');?>
+	<header class="type-1">
+		<?$APPLICATION->IncludeFile('/local/includes/mango/header-top.php');?>
+		<?$APPLICATION->IncludeFile('/local/includes/mango/header-middle.php');?>
 
-	<div class="close-header-layer"></div>
+		<div class="close-header-layer"></div>
 
-	<?$APPLICATION->IncludeFile('/local/includes/mango/top-menu.php');?>
+		<?$APPLICATION->IncludeFile('/local/includes/mango/top-menu.php');?>
 
-</header>
+	</header>
 
 	<div class="clear"></div>
 </div>
 
 <div class="content-push">
-
-	<div class="row">
 
 

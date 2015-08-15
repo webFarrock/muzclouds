@@ -1,6 +1,6 @@
 <?if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED!==true)die();?>
 
-</div>
+
 <div class="footer-wrapper style-3">
 	<footer class="type-1">
 
