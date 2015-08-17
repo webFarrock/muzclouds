@@ -47,7 +47,7 @@
 								<?}?>
 							</a>
 						</div>
-						<a class="tag" href="<?=$arItem['DETAIL_PAGE_URL']?>"><?=join(', ', $arItem['DISPLAY_PROPERTIES']['WHAT_TEACH']['VALUE'])?></a>
+						<a class="tag" href="#"><?=join(', ', $arItem['DISPLAY_PROPERTIES']['WHAT_TEACH']['VALUE'])?></a>
 						<a class="title" href="<?=$arItem['DETAIL_PAGE_URL']?>"><?=$arItem['NAME']?></a>
 
 						<div class="rating-box">

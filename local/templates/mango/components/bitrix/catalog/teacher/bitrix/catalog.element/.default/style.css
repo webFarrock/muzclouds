@@ -5,3 +5,6 @@
 #playlist li:hover{background: #eee; cursor: pointer;}
 #playlist li p{padding: 0 7px;}
 #playlist li b{font-weight: bold;}
+
+.product-detail-box{position: relative;}
+.add-to-bookmark{position: absolute !important; top: 0 !important; right: 0!important; float: none !important; width: auto !important;}

@@ -20,3 +20,10 @@ if(!empty($arResult['PROPERTIES']['MY_AUDIO']['VALUE']) && is_array($arResult['P
 		$cp->SetResultCacheKeys(array('MY_AUDIO'));
 	}
 }
+
+
+$arContacts = array(
+	0 => array(
+		'ico'
+	),
+);

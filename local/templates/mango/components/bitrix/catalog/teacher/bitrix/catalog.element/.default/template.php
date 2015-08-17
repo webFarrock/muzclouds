@@ -3,12 +3,22 @@
 	<div class="information-blocks">
 		<div class="row">
 			<div class="col-sm-4 information-entry main-image-wp">
-				<img src="<?=MANGO_TPL_PATH?>/img/product-main-1.jpg" alt=""  />
+				<?if($arResult['DETAIL_PICTURE']['SRC']){?>
+					<img src="<?=$arResult['DETAIL_PICTURE']['SRC']?>" alt="<?=$arResult['DETAIL_PICTURE']['ALT']?>" title="<?=$arResult['DETAIL_PICTURE']['TITLE']?>"  />
+				<?}elseif($arResult['PREVIEW_PICTURE']['SRC']){?>
+					<img src="<?=$arResult['PREVIEW_PICTURE']['SRC']?>" alt="<?=$arResult['PREVIEW_PICTURE']['ALT']?>" title="<?=$arResult['PREVIEW_PICTURE']['TITLE']?>"  />
+				<?}else{?>
+					<img src="<?=MANGO_TPL_PATH?>/img/product-main-1.jpg" alt=""  />
+				<?}?>
+
 			</div>
 			<div class="col-sm-8 information-entry">
 				<div class="product-detail-box">
 					<h1 class="product-title"><?=$arResult['NAME']?></h1>
-					<h3 class="product-subtitle">Loremous Clothing</h3>
+
+					<a class="button style-11 add-to-bookmark"><i class="fa fa-heart"></i> В закладки</a>
+
+					<?/*<h3 class="product-subtitle">Loremous Clothing</h3>*/?>
 					<div class="rating-box">
 						<div class="star"><i class="fa fa-star"></i></div>
 						<div class="star"><i class="fa fa-star"></i></div>
@@ -19,11 +29,7 @@
 					</div>
 					<div class="product-description detail-info-entry"><?=$arResult['PREVIEW_TEXT']?></div>
 
-					<div class="detail-info-entry">
-						<a class="button style-10">Add to cart</a>
-						<a class="button style-11 add-to-bookmark"><i class="fa fa-heart"></i> Add to Wishlist</a>
-						<div class="clear"></div>
-					</div>
+
 
 					<?if(!empty($arResult['PROPERTIES']['MY_AUDIO']['VALUE'])){?>
 						<div class="detail-info-entry">
@@ -49,13 +55,15 @@
 						</div>
 					<?}?>
 
-					<div class="tags-selector detail-info-entry">
-						<div class="detail-info-entry-title">Tags:</div>
-						<a href="#">bootstrap</a>/
-						<a href="#">collections</a>/
-						<a href="#">color/</a>
-						<a href="#">responsive</a>
+					<div class="detail-info-entry">
+						<div class="detail-info-entry-title">Контакты:</div>
+						<a href="#"><i class="fa fa-phone"></i> 8-888-888-88-88</a><br>
+						<a href="#"><i class="fa fa-inbox"></i> mail@mail.ru</a><br>
+						<a href="#"><i class="fa fa-vk"></i> vk.com/teacher</a><br>
+						<a href="#"><i class="fa fa-youtube"></i> youtube.com/teacher</a><br>
+						<a href="#"><i class="fa fa-skype"></i> my.skype.login</a><br>
 					</div>
+
 					<div class="share-box detail-info-entry">
 						<div class="title">Поделиться в соцсетях</div>
 						<div class="socials-box">
@@ -77,11 +85,14 @@
 	<div class="information-blocks">
 		<div class="tabs-container style-1">
 			<div class="swiper-tabs tabs-switch">
-				<div class="title">Product info</div>
+				<div class="title">Еще:</div>
 				<div class="list">
 					<?if(!empty($arResult['PROPERTIES']['MY_VIDEO']['VALUE'])){?>
 						<?$video_cnt = count($arResult['PROPERTIES']['MY_VIDEO']['VALUE'])?>
 						<a class="tab-switcher">Видео (<?=$video_cnt?>)</a>
+					<?}?>
+					<?if(!empty(trim(strip_tags($arResult['DETAIL_TEXT'])))){?>
+						<a class="tab-switcher">Программа обучения</a>
 					<?}?>
 
 					<a class="tab-switcher">Отзывы (25)</a>
@@ -114,6 +125,16 @@
 						</div>
 					</div>
 				<?}?>
+
+				<div class="tabs-entry">
+					<div class="article-container style-1">
+						<div class="row">
+							<div class="col-md-6 information-entry">
+								<?=$arResult['DETAIL_TEXT']?>
+							</div>
+						</div>
+					</div>
+				</div>
 
 				<div class="tabs-entry">
 					<div class="article-container style-1">

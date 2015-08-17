@@ -8,13 +8,6 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
-		"Преподаватели", 
-		"/teachers/", 
-		Array(), 
-		Array("TYPE"=>"simple-list"),
-		"" 
-	),
-	Array(
 		"Контакты", 
 		"/contacs/", 
 		Array(), 
