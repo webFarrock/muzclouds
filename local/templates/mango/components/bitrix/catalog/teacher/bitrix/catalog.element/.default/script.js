@@ -12,7 +12,7 @@ function initMyAudio(){
             instanceName:"player1",
             parentId:"MY_AUDIO",
             playlistsId:"playlists",
-            mainFolderPath:"http://muzclouds/local/vendor/mp3-light-player/start/content",
+            mainFolderPath:"/local/vendor/mp3-light-player/start/content",
             skinPath:"modern_skin_white",
             showSoundCloudUserNameInTitle:"yes",
             useDeepLinking:"no",

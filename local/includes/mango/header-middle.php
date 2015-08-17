@@ -27,11 +27,19 @@
 		*/?>
 	</div>
 
-	<div class="right-entries">
-		<a class="header-functionality-entry open-search-popup" href="#"><i class="fa fa-search"></i><span title="Поиск">Поиск</span></a>
-		<a class="header-functionality-entry" href="#"><i class="fa fa-user"></i><span title="Кабинет">Кабинет</span></a>
-		<a class="header-functionality-entry" href="#"><i class="fa fa-heart-o"></i><span title="Закладки">Закладки</span></a>
-		<a class="header-functionality-entry" href="#"><i class="fa fa-lock"></i><span title="Выйти">Выйти</span></a>
+	<div class="right-entries user-links">
+		<a class="header-functionality-entry open-search-popup" href="/search/"><i class="fa fa-search"></i><span title="Поиск">Поиск</span></a>
+		<?if($USER->IsAuthorized()){?>
+			<a class="header-functionality-entry" href="/office/"><i class="fa fa-user"></i><span title="Кабинет">Кабинет</span></a>
+			<a class="header-functionality-entry" href="/office/favorites/"><i class="fa fa-heart-o"></i><span title="Закладки">Закладки</span></a>
+			<a class="header-functionality-entry" href="/auth/?logout=yes"><i class="fa fa-eject"></i><span title="Выйти">Выйти</span></a>
+		<?}else{?>
+
+			<a class="header-functionality-entry" href="/auth/?logout=yes"><i class="fa fa-key"></i><span title="Вход">Вход</span></a>
+			<a class="header-functionality-entry" href="/auth/?logout=yes"><i class="fa fa-lock"></i><span title="Регистрация">Регистрация</span></a>
+		<?}?>
+
+
 		<?/*<a class="header-functionality-entry open-cart-popup" href="#"><i class="fa fa-shopping-cart"></i><span>My Cart</span> <b>$255,99</b></a>*/?>
 	</div>
 
