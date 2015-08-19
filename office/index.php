@@ -2,7 +2,14 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Личный кабинет");
 ?>
+	<div class="row">
+		<div class="col-md-12">
+			<?ShortTools::ShowAlert(array('MESSAGE' => 'AL;KSDJ;ALSDF'))?>
+			<?ShortTools::ShowCallout(array('MESSAGE' => 'AL;KSDJ;ALSDF', 'HEADER' => '!!!!!!!!!!1'))?>
+		</div>
+	</div>
 
+<?/*
 	<div class="row">
 		<div class="col-md-12">
 			<div class="box box-primary">
@@ -864,5 +871,5 @@ $APPLICATION->SetTitle("Личный кабинет");
 			</div><!-- /.box -->
 		</div><!-- /.col -->
 	</div><!-- /. row -->
-
+*/?>
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

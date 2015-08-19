@@ -147,6 +147,48 @@ class ShortTools{
 
 	}
 
+	public static function ShowAlert($arParams){
+
+		global $APPLICATION;
+
+		if($arParams['MESSAGE'] <> ""){
+
+			if(!$arParams['ICO'])       $arParams['ICO'] = 'fa-ban';
+			if(!$arParams['CLASSES'])   $arParams['CLASSES'] = 'alert-danger';
+			if(!$arParams['HEADER'])    $arParams['HEADER'] = 'Ошибка!';
+
+			$APPLICATION->IncludeComponent(
+				"bitrix:system.show_message",
+				"alert",
+				Array(
+					"HIDE_CLOSE_BTN"    => $arParams['HIDE_CLOSE_BTN'],
+					"ICO"               => $arParams['ICO'],
+					"HEADER"            => $arParams['HEADER'],
+					"MESSAGE"           => $arParams['MESSAGE'],
+					"CLASSES"           => $arParams['CLASSES'],
+				),null,array("HIDE_ICONS" => "Y")
+			);
+		}
+	}
+	public static function ShowCallout($arParams){
+
+		global $APPLICATION;
+
+		if(!$arParams['CLASSES'])   $arParams['CLASSES'] = 'callout-danger';
+
+		if($arParams['MESSAGE'] <> ""){
+			$APPLICATION->IncludeComponent(
+				"bitrix:system.show_message",
+				"callout",
+				Array(
+					"HEADER"    => $arParams['HEADER'],
+					"MESSAGE"   => $arParams['MESSAGE'],
+					"CLASSES"   => $arParams['CLASSES'],
+				),null,array("HIDE_ICONS" => "Y")
+			);
+		}
+	}
+
 }
 
 

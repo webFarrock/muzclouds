@@ -1,4 +1,5 @@
 <?if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED!==true)die();?>
+
 <nav class="navbar navbar-static-top" role="navigation">
 	<!-- Sidebar toggle button-->
 	<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">

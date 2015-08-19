@@ -3,6 +3,7 @@ require($_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php');
 $APPLICATION->SetTitle('Главная');
 
 ?>
+
 <div class="row">
 <div class="col-md-9 col-md-push-3 col-sm-8 col-sm-push-4 blog-sidebar">
 	<div class="information-blocks">
