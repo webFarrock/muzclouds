@@ -1,0 +1,6 @@
+<?
+$sSectionName = "Профайл";
+$arDirProperties = Array(
+
+);
+?>
