@@ -79,6 +79,16 @@
 						<i class="fa fa-user"></i> <span>Профайл</span>
 					</a>
 				</li>
+				<li class="treeview">
+					<a href="#">
+						<i class="fa fa-dashboard"></i> <span>Я преподаватель</span> <i class="fa fa-angle-left pull-right"></i>
+					</a>
+					<ul class="treeview-menu">
+						<li><a href="#"><i class="fa fa-circle-o"></i> Основные данные</a></li>
+						<li><a href="#"><i class="fa fa-circle-o"></i> Видео </a></li>
+						<li><a href="#"><i class="fa fa-circle-o"></i> Заявки </a></li>
+					</ul>
+				</li>
 
 			</ul>
 		</section>
@@ -92,8 +102,7 @@
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 			<h1>
-				Blank page
-				<small>it all starts here</small>
+				<?$APPLICATION->ShowTitle(true);?>
 			</h1>
 
 			<?$APPLICATION->IncludeComponent("bitrix:breadcrumb", "bcr", Array(), false);?>
