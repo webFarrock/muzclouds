@@ -1,5 +1,5 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
-<div class="row">
+<div class="content-push">
 	<div class="information-blocks">
 		<div class="row">
 			<div class="col-sm-4 information-entry main-image-wp">
@@ -167,4 +167,5 @@
 			</div>
 		</div>
 	</div>
-</div>
+
+</div><?//..content-push">?>

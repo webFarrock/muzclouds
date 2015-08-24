@@ -9,7 +9,7 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true)
 ?>
 
 <div class="row">
-	<div class="col-md-4">
+	<div class="col-md-6">
 		<div class="box box-info">
 			<div class="box-header with-border">
 				<h3 class="box-title"><?=GetMessage('REG_SHOW_HIDE')?></h3>

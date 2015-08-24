@@ -79,16 +79,25 @@
 						<i class="fa fa-user"></i> <span>Профайл</span>
 					</a>
 				</li>
-				<li class="treeview">
-					<a href="#">
-						<i class="fa fa-dashboard"></i> <span>Я преподаватель</span> <i class="fa fa-angle-left pull-right"></i>
-					</a>
-					<ul class="treeview-menu">
-						<li><a href="#"><i class="fa fa-circle-o"></i> Основные данные</a></li>
-						<li><a href="#"><i class="fa fa-circle-o"></i> Видео </a></li>
-						<li><a href="#"><i class="fa fa-circle-o"></i> Заявки </a></li>
-					</ul>
-				</li>
+				<?if(TeacherTools::getUserTeacherAccount()){?>
+					<li class="treeview">
+						<a href="#">
+							<i class="fa fa-dashboard"></i> <span>Я преподаватель</span> <i class="fa fa-angle-left pull-right"></i>
+						</a>
+						<ul class="treeview-menu">
+							<li><a href="/office/teacher-profile/"><i class="fa fa-circle-o"></i> Основные данные</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Видео </a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Заявки </a></li>
+						</ul>
+					</li>
+				<?}else{?>
+					<li>
+						<a href="#">
+							<i class="fa fa-dashboard"></i> <span>Нет профиля преподавателя... подумать как создавать</span>
+						</a>
+					</li>
+				<?}?>
+
 
 			</ul>
 		</section>

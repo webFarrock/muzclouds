@@ -5,7 +5,7 @@ class COfficeUserPanel extends CBitrixComponent{
 
 		$this->arResult = array();
 
-		if($this->StartResultCache(false)){
+		//if($this->StartResultCache(false)){
 			$rsUser = CUser::GetByID($this->arParams['USER_ID']);
 			$arUser = $rsUser->Fetch();
 
@@ -16,7 +16,7 @@ class COfficeUserPanel extends CBitrixComponent{
 			}
 
 			$this->arResult = $arUser;
-		}
+		//}
 
 		$this->includeComponentTemplate();
 	}
