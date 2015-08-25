@@ -80,6 +80,13 @@
 					</a>
 				</li>
 				<?if(TeacherTools::getUserTeacherAccount()){?>
+					<li>
+						<a href="/office/teacher-profile/">
+							<i class="fa fa-dashboard"></i> <span>Профиль преподавателя</span>
+						</a>
+					</li>
+				<?}?>
+				<?if(TeacherTools::getUserTeacherAccount()){?>
 					<li class="treeview">
 						<a href="#">
 							<i class="fa fa-dashboard"></i> <span>Я преподаватель</span> <i class="fa fa-angle-left pull-right"></i>
