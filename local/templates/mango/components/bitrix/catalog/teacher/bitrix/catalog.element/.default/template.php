@@ -11,6 +11,18 @@
 					<img src="<?=MANGO_TPL_PATH?>/img/product-main-1.jpg" alt=""  />
 				<?}?>
 
+				<?if(!empty($arResult['SOC_LINKS']) && is_array($arResult['SOC_LINKS'])){?>
+					<div class="i-in-soc">
+						<div class="title">Я в соцсетях</div>
+						<?foreach($arResult['SOC_LINKS'] as $soc_link){?>
+							<a target="_blank" href="<?=$soc_link['VALUE'];?>" class="btn btn-social-icon btn-<?=$soc_link['ICO']?>"><i class="fa fa-<?=$soc_link['ICO']?>"></i></a>
+						<?}?>
+						<div class="clear"></div>
+					</div>
+				<?}?>
+
+
+
 			</div>
 			<div class="col-sm-8 information-entry">
 				<div class="product-detail-box">
@@ -55,14 +67,18 @@
 						</div>
 					<?}?>
 
-					<div class="detail-info-entry">
-						<div class="detail-info-entry-title">Контакты:</div>
-						<a href="#"><i class="fa fa-phone"></i> 8-888-888-88-88</a><br>
-						<a href="#"><i class="fa fa-inbox"></i> mail@mail.ru</a><br>
-						<a href="#"><i class="fa fa-vk"></i> vk.com/teacher</a><br>
-						<a href="#"><i class="fa fa-youtube"></i> youtube.com/teacher</a><br>
-						<a href="#"><i class="fa fa-skype"></i> my.skype.login</a><br>
-					</div>
+					<?if(!empty($arResult['CONTACTS']) && is_array($arResult['CONTACTS'])){?>
+						<div class="detail-info-entry contacts">
+							<div class="detail-info-entry-title">Контакты:</div>
+							<?foreach($arResult['CONTACTS'] as $arContact){?>
+								<div class="contacts__item">
+									<a class="btn btn-social-icon btn-<?=$arContact['ICO']?> bg-olive"><i class="fa fa-<?=$arContact['ICO']?>"></i></a> <?=$arContact['VALUE']?>
+								</div>
+							<?}?>
+						</div>
+					<?}?>
+
+
 
 					<div class="share-box detail-info-entry">
 						<div class="title">Поделиться в соцсетях</div>

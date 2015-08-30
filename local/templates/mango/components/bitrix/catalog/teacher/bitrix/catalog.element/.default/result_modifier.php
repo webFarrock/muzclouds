@@ -21,9 +21,30 @@ if(!empty($arResult['PROPERTIES']['MY_AUDIO']['VALUE']) && is_array($arResult['P
 	}
 }
 
+$arResult['SOC_LINKS'] = array();
 
-$arContacts = array(
-	0 => array(
-		'ico'
-	),
-);
+foreach($arResult['PROPERTIES'] as $code => $prop){
+
+
+	if(substr_count($code, 'SOC_') && $prop['VALUE']){
+		$prop['ICO'] = strtolower(str_replace('SOC_', '', $code));
+
+		if(!substr_count('http://', $prop['VALUE']) && !substr_count('https://', $prop['VALUE'])){
+			$prop['VALUE'] = 'http://'.$prop['VALUE'];
+		}
+
+		$arResult['SOC_LINKS'][$code] = $prop;
+	}
+}
+
+$arResult['CONTACTS'] = array();
+
+foreach($arResult['PROPERTIES'] as $code => $prop){
+	if(substr_count($code, 'CONT_') && $prop['VALUE']){
+		$prop['ICO'] = strtolower(str_replace('CONT_', '', $code));
+
+		if('email' == $prop['ICO']){$prop['ICO'] = 'inbox';}
+
+		$arResult['CONTACTS'][$code] = $prop;
+	}
+}
