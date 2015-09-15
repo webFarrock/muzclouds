@@ -12,6 +12,12 @@ $arUrlRewrite = array(
 		"ID" => "bitrix:catalog",
 		"PATH" => "/teachers/index.php",
 	),
+	array(
+		"CONDITION" => "#^/office/teacher/#",
+		"RULE" => "",
+		"ID" => "muzclouds:iteacher",
+		"PATH" => "/office/teacher/index.php",
+	),
 );
 
 ?>

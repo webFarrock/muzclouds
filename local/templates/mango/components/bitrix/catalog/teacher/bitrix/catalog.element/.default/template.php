@@ -107,7 +107,7 @@
 						<?$video_cnt = count($arResult['PROPERTIES']['MY_VIDEO']['VALUE'])?>
 						<a class="tab-switcher">Видео (<?=$video_cnt?>)</a>
 					<?}?>
-					<?if(!empty(trim(strip_tags($arResult['DETAIL_TEXT'])))){?>
+					<?if(!empty($arResult['DETAIL_TEXT'])){?>
 						<a class="tab-switcher">Программа обучения</a>
 					<?}?>
 

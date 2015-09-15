@@ -14,7 +14,7 @@ $APPLICATION->SetTitle('Главная');
 						<div class="banner-column col-md-12 col-sm-3">
 							<div class="mozaic-banner-entry type-2" style="background-image: url(<?MANGO_TPL_PATH?>/img/mozaic-banner-4.jpg);">
 								<div class="mozaic-banner-content">
-									<h3 class="subtitle">Iphone 5s 64GB Gold</h3>
+									<h3 class="subtitle">Iphone 5s 64GB Gold !!!3  </h3>
 									<h2 class="title">$299,99</h2>
 									<a class="button style-5" href="#">shop now</a>
 								</div>

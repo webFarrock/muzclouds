@@ -29,6 +29,13 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true)
 					<input type="hidden" name="ID" value=<?= $arResult["ID"] ?>/>
 
 					<div class="form-group">
+						<label class="col-sm-4 control-label"><?= GetMessage('LAST_NAME') ?></label>
+
+						<div class="col-sm-8"><input class="form-control" type="text" name="LAST_NAME" maxlength="50"
+						                             value="<?= $arResult["arUser"]["LAST_NAME"] ?>"/></div>
+					</div>
+
+					<div class="form-group">
 						<label class="col-sm-4 control-label"><?= GetMessage('NAME') ?></label>
 
 						<div class="col-sm-8">
@@ -36,13 +43,6 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true)
 							       maxlength="50" value="<?= $arResult["arUser"]["NAME"] ?>"/>
 						</div>
 
-					</div>
-
-					<div class="form-group">
-						<label class="col-sm-4 control-label"><?= GetMessage('LAST_NAME') ?></label>
-
-						<div class="col-sm-8"><input class="form-control" type="text" name="LAST_NAME" maxlength="50"
-						                             value="<?= $arResult["arUser"]["LAST_NAME"] ?>"/></div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-4 control-label"><?= GetMessage('SECOND_NAME') ?></label>
