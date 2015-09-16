@@ -8,6 +8,13 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
+		"Программа обучения",
+		"/office/teacher/programm/",
+		Array(),
+		Array(),
+		""
+	),
+	Array(
 		"Мои аудио",
 		"/office/teacher/audio/",
 		Array(),
