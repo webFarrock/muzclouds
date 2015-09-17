@@ -23,6 +23,11 @@ switch($curDir){
 		break;
 	}
 
+	case '/office/teacher/programm/':{
+		$componentPage = 'programm';
+		break;
+	}
+
 }
 
 if($componentPage){
