@@ -3,7 +3,7 @@
 class CITeacherMainInfo extends CBitrixComponent{
 	public function executeComponent(){
 		global  $APPLICATION,
-				$USER;
+		        $USER;
 
 		$this->arResult = array();
 		CModule::IncludeModule('iblock');
@@ -12,43 +12,38 @@ class CITeacherMainInfo extends CBitrixComponent{
 			if(!check_bitrix_sessid()){
 				$arError[] = array(
 					"code" => "session time is up",
-					"title" => GetMessage("Âàøà ñåññèÿ èñòåêëà. Îòïðàâüòå ñîîáùåíèå ïîâòîðíî"));
+					"title" => GetMessage("Ð’Ð°ÑˆÐ° ÑÐµÑÑÐ¸Ñ Ð¸ÑÑ‚ÐµÐºÐ»Ð°. ÐžÑ‚Ð¿Ñ€Ð°Ð²ÑŒÑ‚Ðµ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ðµ Ð¿Ð¾Ð²Ñ‚Ð¾Ñ€Ð½Ð¾"));
 			}else{
-				if(TeacherTools::chkTeacherRights($USER->GetID(), $_REQUEST['TEACHER_ELEMENT_ID']))
-				$el = new CIBlockElement;
+				if(TeacherTools::chkTeacherRights($USER->GetID(), $_REQUEST['TEACHER_ELEMENT_ID'])){
 
+					$el = new CIBlockElement;
 
-				$fio = $_REQUEST['LAST_NAME'].' '.$_REQUEST['NAME'].' '.$_REQUEST['SECOND_NAME'];
+					$fio = $_REQUEST['LAST_NAME'].' '.$_REQUEST['NAME'].' '.$_REQUEST['SECOND_NAME'];
 
-				$arTeacher = Array(
-					"IBLOCK_ID"    => $USER->GetID(), // ýëåìåíò èçìåíåí òåêóùèì ïîëüçîâàòåëåì
-					"MODIFIED_BY"    => $USER->GetID(), // ýëåìåíò èçìåíåí òåêóùèì ïîëüçîâàòåëåì
-					"IBLOCK_SECTION" => $_REQUEST['SECTIONS'],          // ýëåìåíò ëåæèò â êîðíå ðàçäåëà
-					//"PROPERTY_VALUES"=> $PROP,
-					"NAME"           => "Ïðåïîäàâàòåëü ".$fio,
-					"ACTIVE"         => $_REQUEST['ACTIVE'],            // àêòèâåí
-				);
+					$arTeacher = Array(
+						"IBLOCK_ID"    => IBLOCK_ID_TEACHERS, // ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½ Ñ‚ÐµÐºÑƒÑ‰Ð¸Ð¼ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÐµÐ¼
+						"MODIFIED_BY"    => $USER->GetID(), // ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½ Ñ‚ÐµÐºÑƒÑ‰Ð¸Ð¼ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÐµÐ¼
+						"IBLOCK_SECTION" => $_REQUEST['SECTIONS'],          // ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚ Ð»ÐµÐ¶Ð¸Ñ‚ Ð² ÐºÐ¾Ñ€Ð½Ðµ Ñ€Ð°Ð·Ð´ÐµÐ»Ð°
+						"NAME"           => "ÐŸÑ€ÐµÐ¿Ð¾Ð´Ð°Ð²Ð°Ñ‚ÐµÐ»ÑŒ ".$fio,
+						"ACTIVE"         => $_REQUEST['ACTIVE'],            // Ð°ÐºÑ‚Ð¸Ð²ÐµÐ½
+					);
 
-				if($res = $el->Update($_REQUEST['TEACHER_ELEMENT_ID'], $arTeacher)){
-					CIBlockElement::SetPropertyValuesEx($_REQUEST['TEACHER_ELEMENT_ID'], IBLOCK_ID_TEACHERS, array(
-						'LAST_NAME'     => $_REQUEST['LAST_NAME'],
-						'NAME'          => $_REQUEST['NAME'],
-						'SECOND_NAME'   => $_REQUEST['SECOND_NAME'],
-						'CONT_EMAIL'    => $_REQUEST['CONT_EMAIL'],
-						'CONT_PHONE'    => $_REQUEST['CONT_PHONE'],
-						'CONT_SKYPE'    => $_REQUEST['CONT_SKYPE'],
-						//'' => $_REQUEST[''],
-					));
+					if($res = $el->Update($_REQUEST['TEACHER_ELEMENT_ID'], $arTeacher)){
+						CIBlockElement::SetPropertyValuesEx($_REQUEST['TEACHER_ELEMENT_ID'], IBLOCK_ID_TEACHERS, array(
+							'LAST_NAME'     => $_REQUEST['LAST_NAME'],
+							'NAME'          => $_REQUEST['NAME'],
+							'SECOND_NAME'   => $_REQUEST['SECOND_NAME'],
+							'CONT_EMAIL'    => $_REQUEST['CONT_EMAIL'],
+							'CONT_PHONE'    => $_REQUEST['CONT_PHONE'],
+							'CONT_SKYPE'    => $_REQUEST['CONT_SKYPE'],
+						));
 
-
-					//CIBlockElement::SetElementSection($_REQUEST['TEACHER_ELEMENT_ID'], $_REQUEST['SECTIONS']);
-
+					}else{
+						$arErrors[] = $el->LAST_ERROR;
+					}
+				}else{// chkTeacherRights
+					$arErrors[] = 'ÐžÑˆÐ¸Ð±ÐºÐ° Ð´Ð¾ÑÑ‚ÑƒÐ¿Ð° Ð´Ð¾ Ð·Ð°Ð¿Ð¸ÑÐ¸ Ñ Ð¾Ð±ÑŠÑÐ²Ð»ÐµÐ½Ð¸ÐµÐ¼';
 				}
-
-
-
-
-
 			}
 
 			if(empty($arErrors)){
@@ -56,18 +51,32 @@ class CITeacherMainInfo extends CBitrixComponent{
 				LocalRedirect('');
 
 			}else{
-				$arResult = $arFields;
+				//
+				$this->getProfileInfo();
+				$this->getTeacherInfo();
+				$this->getWhatTeachEnum();
+				$this->getTeachingSections();
+
+				$this->arResult['TEACHER']['PROPS']["LAST_NAME"]['VALUE']   = $_REQUEST['LAST_NAME'];
+				$this->arResult['TEACHER']['PROPS']["NAME"]['VALUE']        = $_REQUEST['NAME'];
+				$this->arResult['TEACHER']['PROPS']["SECOND_NAME"]['VALUE'] = $_REQUEST['SECOND_NAME'];
+				$this->arResult['TEACHER']['PROPS']["CONT_EMAIL"]['VALUE']  = $_REQUEST['CONT_EMAIL'];
+				$this->arResult['TEACHER']['PROPS']["CONT_PHONE"]['VALUE']  = $_REQUEST['CONT_PHONE'];
+				$this->arResult['TEACHER']['PROPS']["CONT_SKYPE"]['VALUE']  = $_REQUEST['CONT_SKYPE'];
+				$this->arResult['TEACHER']['ACTIVE']                        = $_REQUEST['ACTIVE'];
+				$this->arResult['TEACHER']['SECTIONS']                      = $_REQUEST['SECTIONS'];
+				$this->arResult['ERRORS'] = $arErrors;
 			}
 
 
 		}else{
-
+			$this->getProfileInfo();
+			$this->getTeacherInfo();
+			$this->getWhatTeachEnum();
+			$this->getTeachingSections();
 		}
 
-		$this->getProfileInfo();
-		$this->getTeacherInfo();
-		$this->getWhatTeachEnum();
-		$this->getTeachingSections();
+
 
 		$this->includeComponentTemplate();
 
@@ -78,9 +87,17 @@ class CITeacherMainInfo extends CBitrixComponent{
 
 	public function onPrepareComponentParams($arParams){
 		if ($_SERVER["REQUEST_METHOD"]=="POST" && $_POST["ACTION"]=="EDIT" && check_bitrix_sessid()){
+
 			$_REQUEST['TEACHER_ELEMENT_ID'] = intval($_REQUEST['TEACHER_ELEMENT_ID']);
 			$_REQUEST['ACTIVE'] = $_REQUEST['ACTIVE']?'Y':'N';
 
+			$_REQUEST['NAME']           = trim($_REQUEST['NAME']);
+			$_REQUEST['LAST_NAME']      = trim($_REQUEST['LAST_NAME']);
+			$_REQUEST['SECOND_NAME']    = trim($_REQUEST['SECOND_NAME']);
+
+			$_REQUEST['CONT_EMAIL']     = trim($_REQUEST['CONT_EMAIL']);
+			$_REQUEST['CONT_SKYPE']     = trim($_REQUEST['CONT_SKYPE']);
+			$_REQUEST['CONT_PHONE']     = trim($_REQUEST['CONT_PHONE']);
 		}
 	}
 
@@ -97,7 +114,7 @@ class CITeacherMainInfo extends CBitrixComponent{
 
 		$arSort     = Array();
 		$arSelect   = Array("ID", "IBLOCK_ID", "ACTIVE", "NAME",);
-		$arFilter   = Array("IBLOCK_ID"=>IBLOCK_ID_TEACHERS, 'PROPERTY_USER_ID' => $this->arResult['PROFILE']);
+		$arFilter   = Array("IBLOCK_ID"=>IBLOCK_ID_TEACHERS, 'PROPERTY_USER_ID' => $this->arResult['PROFILE']['ID']);
 		$res        = CIBlockElement::GetList($arSort, $arFilter, false, array('nTopCount' => 1), $arSelect);
 
 		if($obItem = $res->GetNextElement()){

@@ -92,8 +92,7 @@ $MESS["CITY"] = "Город:";
 $MESS["EMAIL"] = "Email:";
 $MESS["SKYPE"] = "Skype:";
 $MESS["PHONE"] = "Телефон:";
-$MESS[""] = "";
-$MESS[""] = "";
+
 $MESS[""] = "";
 $MESS[""] = "";
 $MESS[""] = "";

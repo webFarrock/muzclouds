@@ -1,7 +1,12 @@
 <? if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die(); ?>
 
-
-
+<?if(!empty($arResult['ERRORS']) && is_array($arResult['ERRORS'])){?>
+	<div class="row">
+		<div class="col-md-6">
+		<? ShortTools::ShowAlert(array('MESSAGE' => join('<br>', $arResult['ERRORS']))); ?>
+		</div>
+	</div>
+<?}?>
 
 <form method="post" class="form-horizontal" name="form1" action="" enctype="multipart/form-data">
 <div class="row">
