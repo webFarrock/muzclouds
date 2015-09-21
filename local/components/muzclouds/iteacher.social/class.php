@@ -18,24 +18,16 @@ class CITeacherMainInfo extends CITeacherEditParent{
 
 					$el = new CIBlockElement;
 
-					$fio = $_REQUEST['LAST_NAME'].' '.$_REQUEST['NAME'].' '.$_REQUEST['SECOND_NAME'];
-
 					$arTeacher = Array(
 						"IBLOCK_ID"    => IBLOCK_ID_TEACHERS, // элемент изменен текущим пользователем
 						"MODIFIED_BY"    => $USER->GetID(), // элемент изменен текущим пользователем
-						"IBLOCK_SECTION" => $_REQUEST['SECTIONS'],          // элемент лежит в корне раздела
-						"NAME"           => "Преподаватель ".$fio,
-						"ACTIVE"         => $_REQUEST['ACTIVE'],            // активен
 					);
 
 					if($res = $el->Update($_REQUEST['TEACHER_ELEMENT_ID'], $arTeacher)){
 						CIBlockElement::SetPropertyValuesEx($_REQUEST['TEACHER_ELEMENT_ID'], IBLOCK_ID_TEACHERS, array(
-							'LAST_NAME'     => $_REQUEST['LAST_NAME'],
-							'NAME'          => $_REQUEST['NAME'],
-							'SECOND_NAME'   => $_REQUEST['SECOND_NAME'],
-							'CONT_EMAIL'    => $_REQUEST['CONT_EMAIL'],
-							'CONT_PHONE'    => $_REQUEST['CONT_PHONE'],
-							'CONT_SKYPE'    => $_REQUEST['CONT_SKYPE'],
+							'SOC_VK'        => $_REQUEST['SOC_VK'],
+							'SOC_FACEBOOK'  => $_REQUEST['SOC_FACEBOOK'],
+							'SOC_TWITTER'   => $_REQUEST['SOC_TWITTER'],
 						));
 
 					}else{
@@ -57,14 +49,10 @@ class CITeacherMainInfo extends CITeacherEditParent{
 				$this->getWhatTeachEnum();
 				$this->getTeachingSections();
 
-				$this->arResult['TEACHER']['PROPS']["LAST_NAME"]['VALUE']   = $_REQUEST['LAST_NAME'];
-				$this->arResult['TEACHER']['PROPS']["NAME"]['VALUE']        = $_REQUEST['NAME'];
-				$this->arResult['TEACHER']['PROPS']["SECOND_NAME"]['VALUE'] = $_REQUEST['SECOND_NAME'];
-				$this->arResult['TEACHER']['PROPS']["CONT_EMAIL"]['VALUE']  = $_REQUEST['CONT_EMAIL'];
-				$this->arResult['TEACHER']['PROPS']["CONT_PHONE"]['VALUE']  = $_REQUEST['CONT_PHONE'];
-				$this->arResult['TEACHER']['PROPS']["CONT_SKYPE"]['VALUE']  = $_REQUEST['CONT_SKYPE'];
-				$this->arResult['TEACHER']['ACTIVE']                        = $_REQUEST['ACTIVE'];
-				$this->arResult['TEACHER']['SECTIONS']                      = $_REQUEST['SECTIONS'];
+				$this->arResult['TEACHER']['PROPS']["SOC_VK"]['VALUE']          = $_REQUEST['SOC_VK'];
+				$this->arResult['TEACHER']['PROPS']["SOC_FACEBOOK"]['VALUE']    = $_REQUEST['SOC_FACEBOOK'];
+				$this->arResult['TEACHER']['PROPS']["SOC_TWITTER"]['VALUE']     = $_REQUEST['SOC_TWITTER'];
+
 				$this->arResult['ERRORS'] = $arErrors;
 			}
 
@@ -89,15 +77,26 @@ class CITeacherMainInfo extends CITeacherEditParent{
 		if ($_SERVER["REQUEST_METHOD"]=="POST" && $_POST["ACTION"]=="EDIT" && check_bitrix_sessid()){
 
 			$_REQUEST['TEACHER_ELEMENT_ID'] = intval($_REQUEST['TEACHER_ELEMENT_ID']);
-			$_REQUEST['ACTIVE'] = $_REQUEST['ACTIVE']?'Y':'N';
 
-			$_REQUEST['NAME']           = trim($_REQUEST['NAME']);
-			$_REQUEST['LAST_NAME']      = trim($_REQUEST['LAST_NAME']);
-			$_REQUEST['SECOND_NAME']    = trim($_REQUEST['SECOND_NAME']);
+			foreach($_REQUEST as $key => $val){
+				if(substr_count($key, 'SOC_')){
+					$val = trim($val);
+					$val = str_ireplace('http://', '', $val);
+					$val = str_ireplace('https://', '', $val);
 
-			$_REQUEST['CONT_EMAIL']     = trim($_REQUEST['CONT_EMAIL']);
-			$_REQUEST['CONT_SKYPE']     = trim($_REQUEST['CONT_SKYPE']);
-			$_REQUEST['CONT_PHONE']     = trim($_REQUEST['CONT_PHONE']);
+					if($val){
+						$val = 'https://'.$val;
+					}
+
+					$_REQUEST[$key] = $val;
+				}
+			}
+
+
+			$_REQUEST['SOC_VK']             = trim($_REQUEST['SOC_VK']);
+
+			$_REQUEST['SOC_FACEBOOK']       = trim($_REQUEST['SOC_FACEBOOK']);
+			$_REQUEST['SOC_TWITTER']        = trim($_REQUEST['SOC_TWITTER']);
 		}
 	}
 

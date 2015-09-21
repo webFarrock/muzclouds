@@ -18,6 +18,11 @@ switch($curDir){
 		break;
 	}
 
+	case '/office/teacher/photo/':{
+		$componentPage = 'photo';
+		break;
+	}
+
 	case '/office/teacher/social/':{
 		$componentPage = 'social';
 		break;
@@ -35,7 +40,7 @@ if($componentPage){
 }else{
 	$this->AbortResultCache();
 	\Bitrix\Iblock\Component\Tools::process404(
-		'Ошибка'
+		'Error'
 		,true
 		,true
 		,true

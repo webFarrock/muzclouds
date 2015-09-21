@@ -79,23 +79,33 @@
 						<i class="fa fa-user"></i> <span>Профайл</span>
 					</a>
 				</li>
+				<li>
+					<a href="/office/helpdesk/">
+						<i class="fa fa-wrench"></i> <span>Техподдержка</span>
+					</a>
+				</li>
 				<?if(TeacherTools::getUserTeacherAccount()){?>
-					<li>
-						<a href="/office/teacher/">
-							<i class="fa fa-dashboard"></i> <span>Профиль преподавателя</span>
-						</a>
-					</li>
-				<?}?>
-				<?if(TeacherTools::getUserTeacherAccount()){?>
-					<li class="treeview">
-						<a href="#">
+					<li class="treeview <?if(CSite::InDir('/office/teacher/')){?> active <?}?>">
+						<a href="">
 							<i class="fa fa-dashboard"></i> <span>Я преподаватель</span> <i class="fa fa-angle-left pull-right"></i>
 						</a>
-						<ul class="treeview-menu">
-							<li><a href="/office/teacher/"><i class="fa fa-circle-o"></i> Основные данные</a></li>
-							<li><a href="#"><i class="fa fa-circle-o"></i> Видео </a></li>
-							<li><a href="#"><i class="fa fa-circle-o"></i> Заявки </a></li>
-						</ul>
+						<?$APPLICATION->IncludeComponent("bitrix:menu", "treeview-menu-2lvl", Array(
+							"ROOT_MENU_TYPE" => "tabs",	// Тип меню для первого уровня
+								"MENU_CACHE_TYPE" => "A",	// Тип кеширования
+								"MENU_CACHE_TIME" => "36000000",	// Время кеширования (сек.)
+								"MENU_CACHE_USE_GROUPS" => "Y",	// Учитывать права доступа
+								"MENU_THEME" => "",
+								"CACHE_SELECTED_ITEMS" => "N",
+								"MENU_CACHE_GET_VARS" => "",	// Значимые переменные запроса
+								"MAX_LEVEL" => "1",	// Уровень вложенности меню
+								"CHILD_MENU_TYPE" => "",	// Тип меню для остальных уровней
+								"USE_EXT" => "Y",	// Подключать файлы с именами вида .тип_меню.menu_ext.php
+								"DELAY" => "N",	// Откладывать выполнение шаблона меню
+								"ALLOW_MULTI_SELECT" => "N",	// Разрешить несколько активных пунктов одновременно
+							),
+							false
+						);?>
+
 					</li>
 				<?}else{?>
 					<li>

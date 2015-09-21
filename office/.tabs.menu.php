@@ -22,6 +22,13 @@ $aMenuLinks = Array(
 		""
 	),
 	Array(
+		"Фото",
+		"/office/teacher/photo/",
+		Array(),
+		Array(),
+		""
+	),
+	Array(
 		"Мои видео",
 		"/office/teacher/video/",
 		Array(),
