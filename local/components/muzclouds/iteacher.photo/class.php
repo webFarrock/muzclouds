@@ -1,6 +1,6 @@
 <?if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED!==true)die();
 CBitrixComponent::includeComponentClass('muzclouds:iteacher.edit.parent');
-class CITeacherSocial extends CITeacherEditParent{
+class CITeacherPhoto extends CITeacherEditParent{
 	public function executeComponent(){
 		global  $APPLICATION,
 		        $USER;
@@ -23,12 +23,26 @@ class CITeacherSocial extends CITeacherEditParent{
 						"MODIFIED_BY"    => $USER->GetID(), // элемент изменен текущим пользователем
 					);
 
+					if($_REQUEST['PREVIEW_PICTURE']){
+						$arTeacher['PREVIEW_PICTURE'] = CFile::MakeFileArray($_SERVER["DOCUMENT_ROOT"].$_REQUEST['PREVIEW_PICTURE']);
+					}
+
+					if($_REQUEST['DETAIL_PICTURE']){
+						$arTeacher['DETAIL_PICTURE'] = CFile::MakeFileArray($_SERVER["DOCUMENT_ROOT"].$_REQUEST['DETAIL_PICTURE']);
+					}
+
+					if('Y' == $_REQUEST['PREVIEW_PICTURE_del'] && $_REQUEST['PREVIEW_PICTURE_ID']){
+						$arTeacher['PREVIEW_PICTURE'] = array('del' => 'Y');
+						CFile::Delete($_REQUEST['PREVIEW_PICTURE_ID']);
+					}
+
+					if('Y' == $_REQUEST['DETAIL_PICTURE_del'] && $_REQUEST['DETAIL_PICTURE_ID']){
+						$arTeacher['DETAIL_PICTURE'] = array('del' => 'Y');
+						CFile::Delete($_REQUEST['DETAIL_PICTURE_ID']);
+					}
+
+
 					if($res = $el->Update($_REQUEST['TEACHER_ELEMENT_ID'], $arTeacher)){
-						CIBlockElement::SetPropertyValuesEx($_REQUEST['TEACHER_ELEMENT_ID'], IBLOCK_ID_TEACHERS, array(
-							'SOC_VK'        => $_REQUEST['SOC_VK'],
-							'SOC_FACEBOOK'  => $_REQUEST['SOC_FACEBOOK'],
-							'SOC_TWITTER'   => $_REQUEST['SOC_TWITTER'],
-						));
 
 					}else{
 						$arErrors[] = $el->LAST_ERROR;
@@ -46,13 +60,10 @@ class CITeacherSocial extends CITeacherEditParent{
 				//
 				$this->getProfileInfo();
 				$this->getTeacherInfo();
-				$this->getWhatTeachEnum();
-				$this->getTeachingSections();
 
-				$this->arResult['TEACHER']['PROPS']["SOC_VK"]['VALUE']          = $_REQUEST['SOC_VK'];
-				$this->arResult['TEACHER']['PROPS']["SOC_FACEBOOK"]['VALUE']    = $_REQUEST['SOC_FACEBOOK'];
-				$this->arResult['TEACHER']['PROPS']["SOC_TWITTER"]['VALUE']     = $_REQUEST['SOC_TWITTER'];
 
+				$this->arResult['TEACHER']['PREVIEW_TEXT'] = $_REQUEST['PREVIEW_TEXT'];
+				$this->arResult['TEACHER']['DETAIL_TEXT'] = $_REQUEST['DETAIL_TEXT'];
 				$this->arResult['ERRORS'] = $arErrors;
 			}
 
@@ -60,17 +71,11 @@ class CITeacherSocial extends CITeacherEditParent{
 		}else{
 			$this->getProfileInfo();
 			$this->getTeacherInfo();
-			$this->getWhatTeachEnum();
-			$this->getTeachingSections();
 		}
 
 
 
 		$this->includeComponentTemplate();
-
-		$APPLICATION->SetAdditionalCSS(OFFICE_TPL_PATH.'/plugins/iCheck/all.css');
-		$APPLICATION->AddHeadScript(OFFICE_TPL_PATH.'/plugins/iCheck/icheck.min.js');
-		$APPLICATION->AddHeadScript(OFFICE_TPL_PATH.'/plugins/input-mask/jquery.inputmask.js');;
 	}
 
 	public function onPrepareComponentParams($arParams){
@@ -78,25 +83,6 @@ class CITeacherSocial extends CITeacherEditParent{
 
 			$_REQUEST['TEACHER_ELEMENT_ID'] = intval($_REQUEST['TEACHER_ELEMENT_ID']);
 
-			foreach($_REQUEST as $key => $val){
-				if(substr_count($key, 'SOC_')){
-					$val = trim($val);
-					$val = str_ireplace('http://', '', $val);
-					$val = str_ireplace('https://', '', $val);
-
-					if($val){
-						$val = 'https://'.$val;
-					}
-
-					$_REQUEST[$key] = $val;
-				}
-			}
-
-
-			$_REQUEST['SOC_VK']             = trim($_REQUEST['SOC_VK']);
-
-			$_REQUEST['SOC_FACEBOOK']       = trim($_REQUEST['SOC_FACEBOOK']);
-			$_REQUEST['SOC_TWITTER']        = trim($_REQUEST['SOC_TWITTER']);
 		}
 	}
 

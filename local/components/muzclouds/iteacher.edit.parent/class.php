@@ -14,13 +14,23 @@ class CITeacherEditParent extends CBitrixComponent{
 	public function getTeacherInfo(){
 
 		$arSort     = Array();
-		$arSelect   = Array("ID", "IBLOCK_ID", "ACTIVE", "NAME", "PREVIEW_TEXT", "DETAIL_TEXT");
+		$arSelect   = Array("ID", "IBLOCK_ID", "ACTIVE", "NAME", "PREVIEW_TEXT", "DETAIL_TEXT", 'PREVIEW_PICTURE', 'DETAIL_PICTURE');
 		$arFilter   = Array("IBLOCK_ID"=>IBLOCK_ID_TEACHERS, 'PROPERTY_USER_ID' => $this->arResult['PROFILE']['ID']);
 		$res        = CIBlockElement::GetList($arSort, $arFilter, false, array('nTopCount' => 1), $arSelect);
 
 		if($obItem = $res->GetNextElement()){
 			$arItem = $obItem->GetFields();
 			$arItem['PROPS'] = $obItem->GetProperties();
+
+			/*
+			if($arItem['PREVIEW_PICTURE']){
+				$arItem['PREVIEW_PICTURE'] = CFile::GetFileArray($arItem['PREVIEW_PICTURE']);
+			}
+
+			if($arItem['DETAIL_PICTURE']){
+				$arItem['DETAIL_PICTURE'] = CFile::GetFileArray($arItem['DETAIL_PICTURE']);
+			}*/
+
 
 			$db_groups = CIBlockElement::GetElementGroups($arItem['ID']);
 			while($ar_group = $db_groups->Fetch()){
@@ -31,6 +41,7 @@ class CITeacherEditParent extends CBitrixComponent{
 		$this->arResult['TEACHER'] = $arItem;
 
 	}
+
 
 
 	public function getWhatTeachEnum(){

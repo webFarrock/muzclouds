@@ -15,15 +15,15 @@ $aMenuLinks = Array(
 		""
 	),
 	Array(
-		"Мои аудио",
-		"/office/teacher/audio/",
+		"Фото",
+		"/office/teacher/photo/",
 		Array(),
 		Array(),
 		""
 	),
 	Array(
-		"Фото",
-		"/office/teacher/photo/",
+		"Мои аудио",
+		"/office/teacher/audio/",
 		Array(),
 		Array(),
 		""
