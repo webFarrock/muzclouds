@@ -1,6 +1,6 @@
 <?if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED!==true)die();
 CBitrixComponent::includeComponentClass('muzclouds:iteacher.edit.parent');
-class CITeacherSocial extends CITeacherEditParent{
+class CITeacherVideo extends CITeacherEditParent{
 	public function executeComponent(){
 		global  $APPLICATION,
 		        $USER;
@@ -23,11 +23,8 @@ class CITeacherSocial extends CITeacherEditParent{
 					);
 
 					if($res = $el->Update($this->arParams['TEACHER_ELEMENT_ID'], $arTeacher)){
-						CIBlockElement::SetPropertyValuesEx($this->arParams['TEACHER_ELEMENT_ID'], IBLOCK_ID_TEACHERS, array(
-							'SOC_VK'        => $this->arResult['_REQUEST']['SOC_VK'],
-							'SOC_FACEBOOK'  => $this->arResult['_REQUEST']['SOC_FACEBOOK'],
-							'SOC_TWITTER'   => $this->arResult['_REQUEST']['SOC_TWITTER'],
-						));
+
+						CIBlockElement::SetPropertyValueCode($this->arParams['TEACHER_ELEMENT_ID'], 'MY_VIDEO', $this->arResult['_REQUEST']['MY_VIDEO']);
 
 					}else{
 						$arErrors[] = $el->LAST_ERROR;
@@ -48,9 +45,7 @@ class CITeacherSocial extends CITeacherEditParent{
 				$this->getWhatTeachEnum();
 				$this->getTeachingSections();
 
-				$this->arResult['TEACHER']['PROPS']["SOC_VK"]['VALUE']          = $this->arResult['_REQUEST']['SOC_VK'];
-				$this->arResult['TEACHER']['PROPS']["SOC_FACEBOOK"]['VALUE']    = $this->arResult['_REQUEST']['SOC_FACEBOOK'];
-				$this->arResult['TEACHER']['PROPS']["SOC_TWITTER"]['VALUE']     = $this->arResult['_REQUEST']['SOC_TWITTER'];
+				$this->arResult['TEACHER']['PROPS']["MY_VIDEO"] = $this->arResult['_REQUEST']['MY_VIDEO'];
 
 				$this->arResult['ERRORS'] = $arErrors;
 			}
@@ -80,19 +75,31 @@ class CITeacherSocial extends CITeacherEditParent{
 
 			foreach($_REQUEST as $key => $val){
 
-				$this->arResult['_REQUEST'][$key] = htmlspecialcharsEx($val);
-				$this->arResult['_REQUEST'][$key] = trim($val);
+				$this->arResult['_REQUEST'][$key] = $val;
 
-				if(substr_count($key, 'SOC_')){
-					$val = trim($val);
-					$val = str_ireplace('http://', '', $val);
-					$val = str_ireplace('https://', '', $val);
+				if(substr_count($key, 'MY_VIDEO')){
 
-					if($val){
-						$val = 'https://'.$val;
+					foreach($val as $keyVideo => $arVideo){
+						if($arVideo['VALUE']){
+							$arVideo['DESCRIPTION'] = trim($arVideo['DESCRIPTION']);
+							$arVideo['DESCRIPTION'] = htmlspecialcharsEx($arVideo['DESCRIPTION']);
+							$arVideo['VALUE'] = trim($arVideo['VALUE']);
+							$arVideo['VALUE'] = htmlspecialcharsEx($arVideo['VALUE']);
+							$arVideo['VALUE'] = str_ireplace('http://', '', $arVideo['VALUE']);
+							$arVideo['VALUE'] = str_ireplace('https://', '', $arVideo['VALUE']);
+
+							if($arVideo['VALUE']){
+								$arVideo['VALUE'] = 'https://'.$arVideo['VALUE'];
+							}
+
+							$this->arResult['_REQUEST'][$key][$keyVideo] = $arVideo;
+						}else{
+
+							unset($this->arResult['_REQUEST'][$key][$keyVideo]);
+
+						}
 					}
 
-					$this->arResult['_REQUEST'][$key] = $val;
 				}
 
 
